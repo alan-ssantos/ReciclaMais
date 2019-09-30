@@ -4,11 +4,34 @@
     android:padding="16dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Carlos Alberto"
+        android:textSize="32dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:id="@+id/txtUsuario"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Está pronto para começar?"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/txtMensagem"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/escanear"
         android:id="@+id/btnEscanear"
         android:onClick="abrirScanner"/>
+
+    <Button
+        android:id="@+id/btnEnviar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="abrirLista"
+        android:text="Enviar registros" />
 
 </LinearLayout>
