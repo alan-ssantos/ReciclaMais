@@ -12,7 +12,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
@@ -27,8 +26,7 @@ import java.util.Collection;
 import java.util.List;
 
 import br.com.fiap.reciclamais.R;
-import br.com.fiap.reciclamais.resource.ScannerResource;
-import br.com.fiap.reciclamais.service.ScannerService;
+import br.com.fiap.reciclamais.repository.ScannerRepository;
 
 public class ScannerActivity extends AppCompatActivity {
 
@@ -37,14 +35,14 @@ public class ScannerActivity extends AppCompatActivity {
     private DecoratedBarcodeView barcodeView;
     public static final int MY_PERMISSIONS = 0;
 
-    ScannerResource resource;
+    ScannerRepository resource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
 
-        resource = new ScannerResource(this);
+        resource = new ScannerRepository(this);
 
         barcodeView = this.findViewById(R.id.barcode_scanner);
 

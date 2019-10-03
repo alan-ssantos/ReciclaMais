@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import br.com.fiap.reciclamais.R;
-import br.com.fiap.reciclamais.resource.ScannerResource;
+import br.com.fiap.reciclamais.repository.ScannerRepository;
 
 public class MainActivity extends AppCompatActivity {
 
-    ScannerResource resource;
+    ScannerRepository resource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        resource = new ScannerResource(this);
+        resource = new ScannerRepository(this);
     }
 
 
@@ -29,5 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void abrirLista(View view) {
         startActivity(new Intent(MainActivity.this, ListarRegistrosActivity.class));
+    }
+
+    public void abrirCadastro(View view) {
+        startActivity(new Intent(MainActivity.this, CadastroActivity.class));
     }
 }

@@ -1,4 +1,4 @@
-package br.com.fiap.reciclamais.resource;
+package br.com.fiap.reciclamais.repository;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,19 +6,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-public class ScannerResource extends SQLiteOpenHelper {
+public class ScannerRepository extends SQLiteOpenHelper {
 
 
     public static final String NOME_DB = "registros";
     public static final int VERSAO_DB = 1;
     public static final String TB_REGISTROS = "TB_REGISTROS";
 
-    public ScannerResource (Context context){
+    public ScannerRepository(Context context){
         super(context, NOME_DB, null, VERSAO_DB);
     }
 
@@ -38,11 +38,14 @@ public class ScannerResource extends SQLiteOpenHelper {
 
     public void inserir(String uid){
         SQLiteDatabase db = getWritableDatabase();
-        Date data = Calendar.getInstance().getTime();
+
+        LocalDateTime localDate = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String data = formatter.format(localDate);
 
         ContentValues cv = new ContentValues();
         cv.put("uid", uid);
-        cv.put("data", data.toString());
+        cv.put("data", data);
 
         db.insert(TB_REGISTROS, null, cv);
     }

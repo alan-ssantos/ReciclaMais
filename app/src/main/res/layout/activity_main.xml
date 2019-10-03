@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Carlos Alberto"
-        android:textSize="32dp"
+        android:textSize="32sp"
         android:textAllCaps="true"
         android:textStyle="bold"
         android:id="@+id/txtUsuario"/>
@@ -33,5 +33,12 @@
         android:layout_height="wrap_content"
         android:onClick="abrirLista"
         android:text="Enviar registros" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar"
+        android:onClick="abrirCadastro"/>
 
 </LinearLayout>

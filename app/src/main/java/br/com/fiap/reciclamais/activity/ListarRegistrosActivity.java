@@ -10,13 +10,12 @@ import android.widget.ListView;
 import java.util.List;
 
 import br.com.fiap.reciclamais.R;
-import br.com.fiap.reciclamais.resource.ScannerResource;
-import br.com.fiap.reciclamais.service.ScannerService;
+import br.com.fiap.reciclamais.repository.ScannerRepository;
 
 public class ListarRegistrosActivity extends AppCompatActivity {
 
     List<String> registros;
-    ScannerResource resource;
+    ScannerRepository resource;
     ListView lstRegistros;
 
     @Override
@@ -25,7 +24,7 @@ public class ListarRegistrosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listar_registros);
 
         lstRegistros = findViewById(R.id.lstRegistros);
-        resource = new ScannerResource(this);
+        resource = new ScannerRepository(this);
 
         registros = resource.listar();
 
