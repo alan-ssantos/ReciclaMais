@@ -1,6 +1,6 @@
 package br.com.fiap.reciclamais.model;
 
-public class UsuarioRequest {
+public class CadastroRequest {
 
     private String nome;
     private String email;

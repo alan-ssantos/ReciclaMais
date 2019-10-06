@@ -35,10 +35,16 @@
         android:text="Enviar registros" />
 
 
-    <TextView
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cadastrar"
         android:onClick="abrirCadastro"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:onClick="abrirLogin"/>
 
 </LinearLayout>

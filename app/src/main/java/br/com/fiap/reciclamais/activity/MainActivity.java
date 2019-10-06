@@ -34,4 +34,8 @@ public class MainActivity extends AppCompatActivity {
     public void abrirCadastro(View view) {
         startActivity(new Intent(MainActivity.this, CadastroActivity.class));
     }
+
+    public void abrirLogin(View view) {
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+    }
 }

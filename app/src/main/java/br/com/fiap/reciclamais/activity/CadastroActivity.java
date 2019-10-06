@@ -8,18 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
 import br.com.fiap.reciclamais.R;
-import br.com.fiap.reciclamais.model.Resultado;
-import br.com.fiap.reciclamais.model.UsuarioRequest;
+import br.com.fiap.reciclamais.model.CadastroResponse;
+import br.com.fiap.reciclamais.model.CadastroRequest;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
-import br.com.fiap.reciclamais.utils.enums.StatusResponseEnum;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +30,7 @@ public class CadastroActivity extends AppCompatActivity {
     EditText edtEstado;
     EditText edtCidade;
 
-    Resultado resultado;
+    CadastroResponse cadastroResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,15 +51,15 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void cadastrar(View view) {
 
-        UsuarioRequest usuarioRequest = setUsuarioRequest();
+        CadastroRequest cadastroRequest = setCadastroRequest();
 
-        Call<Resultado> call = new RetrofitConfig().getCadastroService().cadastrar(usuarioRequest);
-        call.enqueue(new Callback<Resultado>() {
+        Call<CadastroResponse> call = new RetrofitConfig().getCadastroService().cadastrar(cadastroRequest);
+        call.enqueue(new Callback<CadastroResponse>() {
             @Override
-            public void onResponse(Call<Resultado> call, Response<Resultado> response) {
+            public void onResponse(Call<CadastroResponse> call, Response<CadastroResponse> response) {
                 if(response.isSuccessful()){
-                    resultado = response.body();
-                    Toast.makeText(CadastroActivity.this, resultado.getResults(), Toast.LENGTH_SHORT).show();
+                    cadastroResponse = response.body();
+                    Toast.makeText(CadastroActivity.this, cadastroResponse.getResults(), Toast.LENGTH_SHORT).show();
                 } else {
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
@@ -77,26 +71,26 @@ public class CadastroActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Resultado> call, Throwable t) {
+            public void onFailure(Call<CadastroResponse> call, Throwable t) {
                 Log.d("err", t.getMessage());
             }
         });
     }
 
-    private UsuarioRequest setUsuarioRequest(){
-        UsuarioRequest usuarioRequest = new UsuarioRequest();
+    private CadastroRequest setCadastroRequest(){
+        CadastroRequest cadastroRequest = new CadastroRequest();
 
-        usuarioRequest.setNome(edtNome.getText().toString().trim());
-        usuarioRequest.setEmail(edtEmail.getText().toString().trim());
-        usuarioRequest.setSenha(edtSenha.getText().toString());
-        usuarioRequest.setCpf(edtCpf.getText().toString().trim());
-        usuarioRequest.setCep(edtCep.getText().toString().trim());
-        usuarioRequest.setRua(edtRua.getText().toString().trim());
-        usuarioRequest.setNumero(Integer.parseInt(edtNumero.getText().toString().trim()));
-        usuarioRequest.setEstado(edtEstado.getText().toString().trim());
-        usuarioRequest.setCidade(edtCidade.getText().toString().trim());
+        cadastroRequest.setNome(edtNome.getText().toString().trim());
+        cadastroRequest.setEmail(edtEmail.getText().toString().trim());
+        cadastroRequest.setSenha(edtSenha.getText().toString());
+        cadastroRequest.setCpf(edtCpf.getText().toString().trim());
+        cadastroRequest.setCep(edtCep.getText().toString().trim());
+        cadastroRequest.setRua(edtRua.getText().toString().trim());
+        cadastroRequest.setNumero(Integer.parseInt(edtNumero.getText().toString().trim()));
+        cadastroRequest.setEstado(edtEstado.getText().toString().trim());
+        cadastroRequest.setCidade(edtCidade.getText().toString().trim());
 
-        return usuarioRequest;
+        return cadastroRequest;
     }
 
 }

@@ -6,19 +6,19 @@ import java.io.Serializable;
 
 import br.com.fiap.reciclamais.utils.enums.StatusResponseEnum;
 
-public class Resultado implements Serializable {
+public class CadastroResponse implements Serializable {
 
     private String results;
     private StatusResponseEnum status;
     private String descricao;
 
-    public Resultado(String results, StatusResponseEnum status, String descricao) {
+    public CadastroResponse(String results, StatusResponseEnum status, String descricao) {
         this.results = results;
         this.status = status;
         this.descricao = descricao;
     }
 
-    public Resultado() {
+    public CadastroResponse() {
     }
 
     public String getResults() {
