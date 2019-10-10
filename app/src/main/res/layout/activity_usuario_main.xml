@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/txtUsuarioNome"
         android:text="@string/bem_vindo"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:textAlignment="center"
         android:layout_width="match_parent"
@@ -21,20 +21,24 @@
         android:text="@string/coleta_do_dia"
         android:textSize="18sp"
         android:textAlignment="center"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>
 
     <RelativeLayout
+        android:paddingVertical="20dp"
+        android:elevation="2dp"
+        android:background="@drawable/main_box_style"
         android:layout_width="match_parent"
-        android:layout_height="82dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
         <ImageView
-            android:layout_marginLeft="60dp"
             android:id="@+id/imgIcon"
-            android:layout_width="71dp"
-            android:layout_height="160dp"
+            android:layout_width="74dp"
+            android:layout_height="82dp"
+            android:layout_marginLeft="60dp"
             android:src="@drawable/icone_ponto">
         </ImageView>
 
@@ -44,19 +48,33 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/imgIcon"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="72dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="73dp"
+            android:layout_marginTop="5dp"
             android:text="@string/pts"
             android:textColor="#19b08f"
-            android:textSize="50sp">
+            android:textSize="50sp"
+            android:textStyle="bold">
         </TextView>
-
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnTrocaPonto"
+        android:background="@drawable/main_button_style"
+        android:drawableLeft="@drawable/icone_troca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="20dp"
+        android:text="Trocar pontos"
+        android:textSize="16dp"
+        android:textColor="#ffffff">
+    </Button>
 
     <TextView
         android:id="@+id/txtUsuarioColeta"
         android:text="@string/hist_rico_recente"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        android:textAlignment="center"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -69,7 +87,8 @@
         android:layout_marginTop="16dp">
 
         <TableRow
-            android:background="#e3e3e3">
+            android:background="@drawable/main_box_style"
+            android:paddingLeft="8dp">
             <TextView
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -88,7 +107,7 @@
                 android:text="Pontuação"/>
         </TableRow>
 
-        <TableRow>
+        <TableRow android:paddingLeft="8dp">
             <TextView
                 android:padding="8dp"
                 android:layout_width="wrap_content"
@@ -103,7 +122,8 @@
                 android:text="+20"/>
         </TableRow>
 
-        <TableRow>
+        <TableRow android:paddingLeft="8dp"
+            android:background="#F3F2F2">
             <TextView
                 android:padding="8dp"
                 android:layout_width="wrap_content"
@@ -118,8 +138,7 @@
                 android:text="+20"/>
         </TableRow>
 
-        <TableRow>
-
+        <TableRow android:paddingLeft="8dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -134,7 +153,8 @@
                 android:text="+20"/>
         </TableRow>
 
-        <TableRow>
+        <TableRow android:paddingLeft="8dp"
+            android:background="#F3F2F2">
             <TextView
                 android:padding="8dp"
                 android:layout_width="wrap_content"
@@ -149,7 +169,7 @@
                 android:text="+20"/>
         </TableRow>
 
-        <TableRow>
+        <TableRow android:paddingLeft="8dp">
             <TextView
                 android:padding="8dp"
                 android:layout_width="wrap_content"
