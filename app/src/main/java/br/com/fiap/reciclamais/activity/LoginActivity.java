@@ -13,8 +13,7 @@ import org.json.JSONObject;
 
 import br.com.fiap.reciclamais.R;
 import br.com.fiap.reciclamais.model.LoginRequest;
-import br.com.fiap.reciclamais.model.CadastroResponse;
-import br.com.fiap.reciclamais.model.LoginResponse;
+import br.com.fiap.reciclamais.model.GenericResponse;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtCPF;
     EditText edtSenha;
 
-    LoginResponse loginResponse;
+    GenericResponse loginResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +40,18 @@ public class LoginActivity extends AppCompatActivity {
     public void logar(View view) {
         LoginRequest loginRequest = setLoginRequest();
 
-        Call<LoginResponse> call = new RetrofitConfig().getLoginService().login(loginRequest);
-        call.enqueue(new Callback<LoginResponse>() {
+        if (loginRequest.getCpf().isEmpty() || loginRequest.getSenha().isEmpty()){
+            Toast.makeText(this, "Insira CPF e Senha", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Call<GenericResponse> call = new RetrofitConfig().getLoginService().login(loginRequest);
+        call.enqueue(new Callback<GenericResponse>() {
             @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
                 if(response.isSuccessful()){
                     loginResponse = response.body();
-                    Toast.makeText(LoginActivity.this, loginResponse.getResults().getNome(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, loginResponse.getResults().getNome(), Toast.LENGTH_SHORT).show();
                 } else {
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
@@ -59,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+            public void onFailure(Call<GenericResponse> call, Throwable t) {
                 Log.d("err", t.getMessage());
             }
         });
