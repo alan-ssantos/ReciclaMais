@@ -23,7 +23,6 @@ public class UsuarioMainActivity extends AppCompatActivity {
         registroPontos.setStretchAllColumns(true);
         registroPontos.bringToFront();
 
-        criarInfoTabela();
     }
 
     public void criarUsuario() {

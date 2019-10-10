@@ -57,18 +57,34 @@
         </TextView>
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/btnTrocaPonto"
+    <RelativeLayout
+        android:paddingVertical="20dp"
+        android:elevation="2dp"
         android:background="@drawable/main_button_style"
-        android:drawableLeft="@drawable/icone_troca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:padding="20dp"
-        android:text="Trocar pontos"
-        android:textSize="16dp"
-        android:textColor="#ffffff">
-    </Button>
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/imgIconTroca"
+            android:layout_alignStart="@+id/txtTrocaPonto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icone_troca">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/txtTrocaPonto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/trocar_pontos"
+            android:layout_marginStart="90dp"
+            android:paddingStart="60dp"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold">
+        </TextView>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/txtUsuarioColeta"
@@ -89,14 +105,15 @@
         <TableRow
             android:background="@drawable/main_box_style"
             android:paddingLeft="8dp">
+
             <TextView
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:padding="6dp"
-                android:layout_width="wrap_content"
+                android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Data da coleta" />
+                android:padding="6dp"
+                android:text="Data da coleta"
+                android:textSize="16sp"
+                android:textStyle="bold" />
             <TextView
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -108,11 +125,12 @@
         </TableRow>
 
         <TableRow android:paddingLeft="8dp">
+
             <TextView
-                android:padding="8dp"
-                android:layout_width="wrap_content"
+                android:layout_width="79dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="8dp"
                 android:text="23/03/2019" />
             <TextView
                 android:padding="8dp"
