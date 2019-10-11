@@ -36,7 +36,7 @@
         </ImageView>
 
         <TextView
-            android:id="@+id/txtUsuarioPonto"
+            android:id="@+id/txtUsuarioPontucao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/imgIcon"

@@ -1,19 +1,20 @@
 package br.com.fiap.reciclamais.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONObject;
 
 import br.com.fiap.reciclamais.R;
-import br.com.fiap.reciclamais.model.LoginRequest;
 import br.com.fiap.reciclamais.model.GenericResponse;
+import br.com.fiap.reciclamais.model.LoginRequest;
 import br.com.fiap.reciclamais.model.LoginResult;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
 import retrofit2.Call;
@@ -27,6 +28,9 @@ public class LoginActivity extends AppCompatActivity {
 
     GenericResponse<LoginResult> loginResponse;
 
+    Activity activity = LoginActivity.this;
+    LoginRequest loginRequest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void logar(View view) {
-        LoginRequest loginRequest = setLoginRequest();
+         loginRequest = setLoginRequest();
 
         if (loginRequest.getCpf().isEmpty() || loginRequest.getSenha().isEmpty()){
             Toast.makeText(this, "Insira CPF e Senha", Toast.LENGTH_SHORT).show();
@@ -53,6 +57,9 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     loginResponse = response.body();
                     Toast.makeText(LoginActivity.this, loginResponse.getResults().getNome(), Toast.LENGTH_SHORT).show();
+
+                    abrirUsuarioMain();
+
                 } else {
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
@@ -78,4 +85,12 @@ public class LoginActivity extends AppCompatActivity {
 
         return request;
     }
+
+    private void abrirUsuarioMain(){
+        Intent intent = new Intent(activity, UsuarioMainActivity.class);
+        intent.putExtra("cpf", loginRequest.getCpf());
+        startActivity(intent);
+
+    }
+
 }
