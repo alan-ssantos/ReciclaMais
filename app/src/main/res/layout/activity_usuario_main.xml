@@ -9,9 +9,7 @@
     <TextView
         android:id="@+id/txtUsuarioNome"
         android:text="@string/bem_vindo"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
+        style="@style/TitleStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>
@@ -19,19 +17,14 @@
     <TextView
         android:id="@+id/txtUsuarioMsg"
         android:text="@string/coleta_do_dia"
-        android:textSize="18sp"
-        android:textAlignment="center"
-        android:layout_marginTop="8dp"
+        style="@style/SubtitleStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>
 
     <RelativeLayout
         android:paddingVertical="20dp"
-        android:elevation="2dp"
-        android:background="@drawable/main_box_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/BoxStyle"
         android:layout_marginTop="20dp">
 
         <ImageView
@@ -59,10 +52,7 @@
 
     <RelativeLayout
         android:paddingVertical="20dp"
-        android:elevation="2dp"
-        android:background="@drawable/main_button_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/ButtonStyle"
         android:layout_marginTop="20dp">
 
         <ImageView

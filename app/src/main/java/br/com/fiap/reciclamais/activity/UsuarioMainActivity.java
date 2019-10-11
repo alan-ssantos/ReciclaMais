@@ -29,16 +29,16 @@ public class UsuarioMainActivity extends AppCompatActivity {
 
     }
 
-    public void criarInfoTabela() {
-        for(int i = 0; i < 4; i++){
-            TableRow tr =  new TableRow(this);
-            TextView c1 = new TextView(this);
-            c1.setText(usuarioTO[i].getName());
-            TextView c2 = new TextView(this);
-            c2.setText(String.valueOf(usuarioTO[i].getPrice()));
-            tr.addView(c1);
-            tr.addView(c2);
-            registroPontos.addView(tr);
-        }
-    }
+//    public void criarInfoTabela() {
+//        for(int i = 0; i < 4; i++){
+//            TableRow tr =  new TableRow(this);
+//            TextView c1 = new TextView(this);
+//            c1.setText(usuarioTO[i].getName());
+//            TextView c2 = new TextView(this);
+//            c2.setText(String.valueOf(usuarioTO[i].getPrice()));
+//            tr.addView(c1);
+//            tr.addView(c2);
+//            registroPontos.addView(tr);
+//        }
+//    }
 }

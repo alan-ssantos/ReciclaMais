@@ -1,8 +1,9 @@
-<ScrollView android:layout_width="match_parent"
+<ScrollView
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-
+    android:background="@drawable/main_background_color"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout android:layout_width="match_parent"
@@ -16,105 +17,104 @@
             android:text="@string/nome"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/edtNome"
-            />
+            style="@style/InputStyle"
+            android:id="@+id/edtNome" />
 
         <!-- EMAIL -->
         <TextView
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/email"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/InputStyle"
             android:inputType="textEmailAddress"
             android:id="@+id/edtEmail"/>
 
         <!-- SENHA -->
         <TextView
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/senha" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/InputStyle"
             android:inputType="textPassword"
             android:id="@+id/edtSenha"/>
 
         <!-- CPF -->
         <TextView
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/cpf"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/InputStyle"
             android:id="@+id/edtCpf"/>
 
         <!-- CEP -->
         <TextView
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/cep"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/InputStyle"
             android:id="@+id/edtCep"/>
 
         <!-- RUA -->
         <TextView
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/rua"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/InputStyle"
             android:id="@+id/edtRua"/>
 
         <!-- NUMERO -->
         <TextView
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/numero"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/InputStyle"
             android:inputType="number"
             android:id="@+id/edtNumero"/>
 
         <!-- ESTADO -->
         <TextView
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/estado"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/InputStyle"
             android:id="@+id/edtEstado"/>
 
         <!-- CIDADE -->
         <TextView
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/cidade"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/InputStyle"
             android:id="@+id/edtCidade"/>
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/ButtonStyle"
+            android:layout_marginTop="20dp"
+            android:textColor="#ffffff"
             android:text="@string/cadastrar"
             android:onClick="cadastrar"/>
 
