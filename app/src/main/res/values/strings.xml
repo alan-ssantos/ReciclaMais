@@ -4,4 +4,19 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="cidade">Cidade</string>
+    <string name="estado">Estado</string>
+    <string name="numero">Numero</string>
+    <string name="rua">Rua</string>
+    <string name="cep">CEP</string>
+    <string name="cpf">CPF</string>
+    <string name="senha">Senha</string>
+    <string name="email">E-mail</string>
+    <string name="nome">Nome</string>
+    <string name="coleta_do_dia">A próxima coleta é no dia 16/10/2019</string>
+    <string name="bem_vindo">Bem vindo, Alan</string>
+    <string name="pts">120 pts</string>
+    <string name="hist_rico_recente">Histórico recente</string>
+    <string name="trocar_pontos">Trocar pontos</string>
 </resources>
