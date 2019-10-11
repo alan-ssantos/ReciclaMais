@@ -1,27 +1,25 @@
 package br.com.fiap.reciclamais.model;
 
-import java.util.List;
+public class GenericResponse<T> {
 
-public class LoginResponse {
-
-    private LoginResults results;
+    private T results;
     private String status;
     private String descricao;
 
-    public LoginResponse(LoginResults results, String status, String descricao) {
+    public GenericResponse(T results, String status, String descricao) {
         this.results = results;
         this.status = status;
         this.descricao = descricao;
     }
 
-    public LoginResponse() {
+    public GenericResponse() {
     }
 
-    public LoginResults getResults() {
+    public T getResults() {
         return results;
     }
 
-    public void setResults(LoginResults results) {
+    public void setResults(T results) {
         this.results = results;
     }
 

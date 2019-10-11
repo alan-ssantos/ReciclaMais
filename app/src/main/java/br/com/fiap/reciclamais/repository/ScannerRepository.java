@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.fiap.reciclamais.model.Registro;
+
 public class ScannerRepository extends SQLiteOpenHelper {
 
 
@@ -50,8 +52,8 @@ public class ScannerRepository extends SQLiteOpenHelper {
         db.insert(TB_REGISTROS, null, cv);
     }
 
-    public List<String> listar(){
-        List<String> registros = new ArrayList<>();
+    public List<Registro> listar(){
+        List<Registro> registros = new ArrayList<>();
 
         SQLiteDatabase db = getReadableDatabase();
 
@@ -66,7 +68,10 @@ public class ScannerRepository extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()){
             do {
-                String registro = cursor.getString(0) + " / " + cursor.getString(1);
+                Registro registro = new Registro();
+
+                registro.setUuid(cursor.getString(0));
+                registro.setData(cursor.getString(1));
 
                 registros.add(registro);
             } while (cursor.moveToNext());
@@ -75,5 +80,10 @@ public class ScannerRepository extends SQLiteOpenHelper {
         return registros;
     }
 
+    public void limpar(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.delete(TB_REGISTROS, null, null);
+    }
 
 }

@@ -51,9 +51,9 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void cadastrar(View view) {
 
-        CadastroRequest cadastroRequest = setCadastroRequest();
+        CadastroRequest request = setCadastroRequest();
 
-        Call<CadastroResponse> call = new RetrofitConfig().getCadastroService().cadastrar(cadastroRequest);
+        Call<CadastroResponse> call = new RetrofitConfig().getCadastroService().cadastrar(request);
         call.enqueue(new Callback<CadastroResponse>() {
             @Override
             public void onResponse(Call<CadastroResponse> call, Response<CadastroResponse> response) {
