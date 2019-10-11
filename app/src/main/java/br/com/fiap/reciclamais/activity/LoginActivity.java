@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import br.com.fiap.reciclamais.R;
 import br.com.fiap.reciclamais.model.LoginRequest;
 import br.com.fiap.reciclamais.model.GenericResponse;
+import br.com.fiap.reciclamais.model.LoginResult;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtCPF;
     EditText edtSenha;
 
-    GenericResponse loginResponse;
+    GenericResponse<LoginResult> loginResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +46,13 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        Call<GenericResponse> call = new RetrofitConfig().getLoginService().login(loginRequest);
-        call.enqueue(new Callback<GenericResponse>() {
+        Call<GenericResponse<LoginResult>> call = new RetrofitConfig().getLoginService().login(loginRequest);
+        call.enqueue(new Callback<GenericResponse<LoginResult>>() {
             @Override
-            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
+            public void onResponse(Call<GenericResponse<LoginResult>> call, Response<GenericResponse<LoginResult>> response) {
                 if(response.isSuccessful()){
                     loginResponse = response.body();
-                    //Toast.makeText(LoginActivity.this, loginResponse.getResults().getNome(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, loginResponse.getResults().getNome(), Toast.LENGTH_SHORT).show();
                 } else {
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<GenericResponse> call, Throwable t) {
+            public void onFailure(Call<GenericResponse<LoginResult>> call, Throwable t) {
                 Log.d("err", t.getMessage());
             }
         });

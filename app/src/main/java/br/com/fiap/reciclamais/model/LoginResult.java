@@ -2,17 +2,17 @@ package br.com.fiap.reciclamais.model;
 
 import br.com.fiap.reciclamais.utils.enums.PerfilEnum;
 
-public class LoginResults {
+public class LoginResult {
 
     private String nome;
     private PerfilEnum perfil;
 
-    public LoginResults(String nome, PerfilEnum perfil) {
+    public LoginResult(String nome, PerfilEnum perfil) {
         this.nome = nome;
         this.perfil = perfil;
     }
 
-    public LoginResults() {
+    public LoginResult() {
     }
 
     public String getNome() {

@@ -80,5 +80,10 @@ public class ScannerRepository extends SQLiteOpenHelper {
         return registros;
     }
 
+    public void limpar(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.delete(TB_REGISTROS, null, null);
+    }
 
 }

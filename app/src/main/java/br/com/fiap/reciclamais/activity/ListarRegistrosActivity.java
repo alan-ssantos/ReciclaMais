@@ -2,6 +2,7 @@ package br.com.fiap.reciclamais.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +16,6 @@ import java.util.List;
 import br.com.fiap.reciclamais.R;
 import br.com.fiap.reciclamais.adapter.RegistrosAdapter;
 import br.com.fiap.reciclamais.model.GenericResponse;
-import br.com.fiap.reciclamais.model.LoginResults;
 import br.com.fiap.reciclamais.model.Registro;
 import br.com.fiap.reciclamais.model.RegistroResult;
 import br.com.fiap.reciclamais.repository.ScannerRepository;
@@ -73,6 +73,11 @@ public class ListarRegistrosActivity extends AppCompatActivity {
             }
         });
 
+        limparListar();
+    }
 
+    private void limparListar(){
+
+        resource.limpar();
     }
 }
