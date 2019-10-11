@@ -11,7 +11,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
@@ -26,21 +26,24 @@ import java.util.Collection;
 import java.util.List;
 
 import br.com.fiap.reciclamais.R;
+import br.com.fiap.reciclamais.repository.ScannerRepository;
 
 public class ScannerActivity extends AppCompatActivity {
 
-    private TextView txtResult;
     private String lastTxt;
     private Activity activity = this;
     private DecoratedBarcodeView barcodeView;
     public static final int MY_PERMISSIONS = 0;
+
+    ScannerRepository resource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
 
-        txtResult =  findViewById(R.id.txtResult);
+        resource = new ScannerRepository(this);
+
         barcodeView = this.findViewById(R.id.barcode_scanner);
 
         if (ContextCompat.checkSelfPermission(this,
@@ -68,8 +71,9 @@ public class ScannerActivity extends AppCompatActivity {
             }
 
             lastTxt = result.getText();
-            txtResult.setText("Ultimo: " + lastTxt);
 
+            resource.inserir(lastTxt);
+            exibeToast("Adicionado: " + lastTxt);
         }
 
         @Override
@@ -78,7 +82,7 @@ public class ScannerActivity extends AppCompatActivity {
     };
 
     private void initScanner(){
-        Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.QR_CODE, BarcodeFormat.CODE_39);
+        Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.QR_CODE);
         barcodeView.getBarcodeView().setDecoderFactory(new DefaultDecoderFactory(formats));
         barcodeView.initializeFromIntent(getIntent());
         barcodeView.decodeContinuous(callback);
@@ -140,5 +144,9 @@ public class ScannerActivity extends AppCompatActivity {
 
     public void exibeToast(String msg){
         Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    public void finalizar(View view) {
+        finish();
     }
 }
