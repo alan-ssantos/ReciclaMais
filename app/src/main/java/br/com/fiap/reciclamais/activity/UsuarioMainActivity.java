@@ -1,17 +1,6 @@
 package br.com.fiap.reciclamais.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import br.com.fiap.reciclamais.R;
-import br.com.fiap.reciclamais.model.GenericResponse;
-import br.com.fiap.reciclamais.model.LoginResult;
-import br.com.fiap.reciclamais.model.Usuario;
-import br.com.fiap.reciclamais.model.UsuarioResult;
-import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TableLayout;
@@ -19,7 +8,27 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONObject;
+
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import br.com.fiap.reciclamais.R;
+import br.com.fiap.reciclamais.model.response.GenericResponse;
+import br.com.fiap.reciclamais.model.result.HistoricoResult;
+import br.com.fiap.reciclamais.model.result.UsuarioResult;
+import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UsuarioMainActivity extends AppCompatActivity {
 
@@ -29,6 +38,7 @@ public class UsuarioMainActivity extends AppCompatActivity {
 
     String cpf;
     GenericResponse<UsuarioResult> usuarioResponse;
+    GenericResponse<List<HistoricoResult>> historicoResponse;
 
 
     @Override
@@ -41,14 +51,15 @@ public class UsuarioMainActivity extends AppCompatActivity {
         registroPontos.bringToFront();
 
         txtNome = findViewById(R.id.txtUsuarioNome);
-        txtPontuacao = findViewById(R.id.txtUsuarioPontucao);
+        txtPontuacao = findViewById(R.id.txtUsuarioPontuacao);
 
         cpf = this.getIntent().getExtras().getString("cpf");
 
-        criarUsuario();
+        buscarUsuario();
+        buscaHistorico();
     }
 
-    public void criarUsuario() {
+    public void buscarUsuario() {
         Call<GenericResponse<UsuarioResult>> call = new RetrofitConfig().getUsuarioService().buscar(cpf);
         call.enqueue(new Callback<GenericResponse<UsuarioResult>>() {
 
@@ -59,8 +70,6 @@ public class UsuarioMainActivity extends AppCompatActivity {
 
                     txtNome.setText(usuarioResponse.getResults().getNome());
                     txtPontuacao.setText(usuarioResponse.getResults().getPontuacaoTotal().toString());
-
-                    criarUsuario();
 
                 } else {
                     try {
@@ -79,16 +88,55 @@ public class UsuarioMainActivity extends AppCompatActivity {
         });
     }
 
-//    public void criarInfoTabela() {
-//        for(int i = 0; i < 4; i++){
-//            TableRow tr =  new TableRow(this);
-//            TextView c1 = new TextView(this);
-//            c1.setText(usuarioTO[i].getName());
-//            TextView c2 = new TextView(this);
-//            c2.setText(String.valueOf(usuarioTO[i].getPrice()));
-//            tr.addView(c1);
-//            tr.addView(c2);
-//            registroPontos.addView(tr);
-//        }
-//    }
+
+    public void buscaHistorico(){
+        Call<GenericResponse<List<HistoricoResult>>> call = new RetrofitConfig().getHistoricoService().buscar(cpf);
+        call.enqueue(new Callback<GenericResponse<List<HistoricoResult>>>() {
+
+            @Override
+            public void onResponse(Call<GenericResponse<List<HistoricoResult>>> call, Response<GenericResponse<List<HistoricoResult>>> response) {
+                if(response.isSuccessful()){
+                    historicoResponse = response.body();
+                    preencherTabela();
+                } else {
+                    try {
+                        JSONObject jsonError = new JSONObject(response.errorBody().string());
+                        Toast.makeText(UsuarioMainActivity.this, jsonError.getString("descricao"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenericResponse<List<HistoricoResult>>> call, Throwable t) {
+                Log.d("err", t.getMessage());
+            }
+        });
+    }
+
+    public void preencherTabela() {
+        for(int i = 0; i < 5; i++){
+            TableRow tr =  new TableRow(this);
+            tr.setPadding(8, 12, 8, 12);
+
+            if (i%2 == 1) tr.setBackgroundColor(Color.WHITE);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDateTime localDateTime = LocalDateTime.parse(historicoResponse.getResults().get(i).getData());
+            String data = localDateTime.format(formatter);
+
+            TextView txtData = new TextView(this);
+            txtData.setPadding(8, 0, 8,0);
+            txtData.setText(String.valueOf(data));
+
+            TextView txtPonto = new TextView(this);
+            txtPonto.setText(String.valueOf(historicoResponse.getResults().get(i).getPonto()));
+
+            tr.addView(txtData);
+            tr.addView(txtPonto);
+            registroPontos.addView(tr);
+        }
+    }
+
 }

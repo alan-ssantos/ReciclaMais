@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONObject;
 
 import br.com.fiap.reciclamais.R;
-import br.com.fiap.reciclamais.model.GenericResponse;
-import br.com.fiap.reciclamais.model.LoginRequest;
-import br.com.fiap.reciclamais.model.LoginResult;
+import br.com.fiap.reciclamais.model.response.GenericResponse;
+import br.com.fiap.reciclamais.model.request.LoginRequest;
+import br.com.fiap.reciclamais.model.result.LoginResult;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -89,8 +89,9 @@ public class LoginActivity extends AppCompatActivity {
     private void abrirUsuarioMain(){
         Intent intent = new Intent(activity, UsuarioMainActivity.class);
         intent.putExtra("cpf", loginRequest.getCpf());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-
+        finish();
     }
 
 }

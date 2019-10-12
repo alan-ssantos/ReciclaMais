@@ -11,8 +11,8 @@ import android.widget.Toast;
 import org.json.JSONObject;
 
 import br.com.fiap.reciclamais.R;
-import br.com.fiap.reciclamais.model.CadastroResponse;
-import br.com.fiap.reciclamais.model.CadastroRequest;
+import br.com.fiap.reciclamais.model.response.CadastroResponse;
+import br.com.fiap.reciclamais.model.request.CadastroRequest;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
 import retrofit2.Call;
 import retrofit2.Callback;

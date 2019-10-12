@@ -1,7 +1,7 @@
 package br.com.fiap.reciclamais.service;
 
-import br.com.fiap.reciclamais.model.CadastroResponse;
-import br.com.fiap.reciclamais.model.CadastroRequest;
+import br.com.fiap.reciclamais.model.response.CadastroResponse;
+import br.com.fiap.reciclamais.model.request.CadastroRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;

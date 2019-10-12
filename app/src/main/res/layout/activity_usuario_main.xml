@@ -36,7 +36,7 @@
         </ImageView>
 
         <TextView
-            android:id="@+id/txtUsuarioPontucao"
+            android:id="@+id/txtUsuarioPontuacao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/imgIcon"
@@ -114,82 +114,10 @@
                 android:text="Pontuação"/>
         </TableRow>
 
-        <TableRow android:paddingLeft="8dp">
-
-            <TextView
-                android:layout_width="79dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:text="23/03/2019" />
-            <TextView
-                android:padding="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="+20"/>
-        </TableRow>
-
-        <TableRow android:paddingLeft="8dp"
-            android:background="#F3F2F2">
-            <TextView
-                android:padding="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="20/03/2019" />
-            <TextView
-                android:padding="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="+20"/>
-        </TableRow>
-
-        <TableRow android:paddingLeft="8dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:text="18/03/2019" />
-            <TextView
-                android:padding="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="+20"/>
-        </TableRow>
-
-        <TableRow android:paddingLeft="8dp"
-            android:background="#F3F2F2">
-            <TextView
-                android:padding="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="23/03/2019" />
-            <TextView
-                android:padding="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="+20"/>
-        </TableRow>
-
-        <TableRow android:paddingLeft="8dp">
-            <TextView
-                android:padding="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="23/03/2019" />
-            <TextView
-                android:padding="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="+20"/>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
         </TableRow>
     </TableLayout>
 
