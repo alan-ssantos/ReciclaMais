@@ -27,7 +27,7 @@ public class ScannerRepository extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + TB_REGISTROS + " (" +
-                " uid TEXT NOT NULL," +
+                " uuid TEXT NOT NULL," +
                 " data TEXT NOT NULL )";
 
         db.execSQL(sql);
@@ -38,7 +38,7 @@ public class ScannerRepository extends SQLiteOpenHelper {
 
     }
 
-    public void inserir(String uid){
+    public void inserir(String uuid){
         SQLiteDatabase db = getWritableDatabase();
 
         LocalDateTime localDate = LocalDateTime.now();
@@ -46,7 +46,7 @@ public class ScannerRepository extends SQLiteOpenHelper {
         String data = formatter.format(localDate);
 
         ContentValues cv = new ContentValues();
-        cv.put("uid", uid);
+        cv.put("uuid", uuid);
         cv.put("data", data);
 
         db.insert(TB_REGISTROS, null, cv);
@@ -58,7 +58,7 @@ public class ScannerRepository extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.query(TB_REGISTROS,
-                new String[]{"uid", "data"},
+                new String[]{"uuid", "data"},
                 null,
                 null,
                 null,
@@ -78,6 +78,26 @@ public class ScannerRepository extends SQLiteOpenHelper {
         }
 
         return registros;
+    }
+
+    public boolean verificaDuplicidade(String uuid){
+        Registro registro = new Registro();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.query(TB_REGISTROS,
+                new String[]{"uuid"},
+                "uuid = ?",
+                new String[]{uuid},
+                null,
+                null,
+                null
+                );
+
+        if (cursor.moveToFirst()){
+            return true;
+        }
+
+        return false;
     }
 
     public void limpar(){
