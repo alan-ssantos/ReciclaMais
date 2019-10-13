@@ -14,8 +14,8 @@ import br.com.fiap.reciclamais.model.Registro;
 
 public class RegistrosAdapter extends BaseAdapter {
 
-    Context context;
-    List<Registro> registros;
+    private Context context;
+    private List<Registro> registros;
 
     public RegistrosAdapter(Context context, List<Registro> registros) {
         this.context = context;

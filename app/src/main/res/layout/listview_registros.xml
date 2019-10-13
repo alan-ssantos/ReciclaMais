@@ -16,5 +16,4 @@
         android:id="@+id/txtData"
         android:layout_toEndOf="@id/txtUuid"/>
 
-
 </RelativeLayout>

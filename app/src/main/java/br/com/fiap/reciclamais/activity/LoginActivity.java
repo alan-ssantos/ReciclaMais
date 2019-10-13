@@ -17,6 +17,7 @@ import br.com.fiap.reciclamais.model.response.GenericResponse;
 import br.com.fiap.reciclamais.model.request.LoginRequest;
 import br.com.fiap.reciclamais.model.result.LoginResult;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
+import br.com.fiap.reciclamais.utils.enums.PerfilEnum;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,9 +26,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText edtCPF;
     EditText edtSenha;
-
     GenericResponse<LoginResult> loginResponse;
-
     Activity activity = LoginActivity.this;
     LoginRequest loginRequest;
 
@@ -38,12 +37,10 @@ public class LoginActivity extends AppCompatActivity {
 
         edtCPF = findViewById(R.id.edtLoCPF);
         edtSenha = findViewById(R.id.edtLoSenha);
-
     }
 
-
     public void logar(View view) {
-         loginRequest = setLoginRequest();
+        loginRequest = setLoginRequest();
 
         if (loginRequest.getCpf().isEmpty() || loginRequest.getSenha().isEmpty()){
             Toast.makeText(this, "Insira CPF e Senha", Toast.LENGTH_SHORT).show();
@@ -56,10 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<GenericResponse<LoginResult>> call, Response<GenericResponse<LoginResult>> response) {
                 if(response.isSuccessful()){
                     loginResponse = response.body();
-                    Toast.makeText(LoginActivity.this, loginResponse.getResults().getNome(), Toast.LENGTH_SHORT).show();
-
-                    abrirUsuarioMain();
-
+                    abrirPerfil(loginResponse.getResults().getPerfil());
                 } else {
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
@@ -86,12 +80,22 @@ public class LoginActivity extends AppCompatActivity {
         return request;
     }
 
-    private void abrirUsuarioMain(){
-        Intent intent = new Intent(activity, UsuarioMainActivity.class);
+    private void abrirPerfil(PerfilEnum perfil){
+        Intent intent;
+
+        switch (perfil){
+            case CLIENTE: intent = new Intent(activity, UsuarioActivity.class); break;
+            case FUNCIONARIO: intent =  new Intent(activity, FuncionarioActivity.class); break;
+            default: throw new IllegalStateException("Unexpected value: " + perfil);
+        }
+
         intent.putExtra("cpf", loginRequest.getCpf());
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }
 
+    public void abrirCadastro(View view) {
+        startActivity(new Intent(LoginActivity.this, CadastroActivity.class));
+    }
 }

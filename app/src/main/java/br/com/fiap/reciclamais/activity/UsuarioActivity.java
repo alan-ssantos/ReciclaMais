@@ -12,13 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
 
-import java.text.Format;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import br.com.fiap.reciclamais.R;
@@ -30,7 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UsuarioMainActivity extends AppCompatActivity {
+public class UsuarioActivity extends AppCompatActivity {
 
     TableLayout registroPontos;
     TextView txtNome;
@@ -44,7 +39,7 @@ public class UsuarioMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_usuario_main);
+        setContentView(R.layout.activity_usuario);
 
         registroPontos = findViewById(R.id.tableLayout);
         registroPontos.setStretchAllColumns(true);
@@ -74,7 +69,7 @@ public class UsuarioMainActivity extends AppCompatActivity {
                 } else {
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
-                        Toast.makeText(UsuarioMainActivity.this, jsonError.getString("descricao"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UsuarioActivity.this, jsonError.getString("descricao"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -97,11 +92,11 @@ public class UsuarioMainActivity extends AppCompatActivity {
             public void onResponse(Call<GenericResponse<List<HistoricoResult>>> call, Response<GenericResponse<List<HistoricoResult>>> response) {
                 if(response.isSuccessful()){
                     historicoResponse = response.body();
-                    preencherTabela();
+                    preencherTabela(historicoResponse.getResults());
                 } else {
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
-                        Toast.makeText(UsuarioMainActivity.this, jsonError.getString("descricao"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UsuarioActivity.this, jsonError.getString("descricao"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -115,28 +110,49 @@ public class UsuarioMainActivity extends AppCompatActivity {
         });
     }
 
-    public void preencherTabela() {
-        for(int i = 0; i < 5; i++){
-            TableRow tr =  new TableRow(this);
+    public void preencherTabela(List<HistoricoResult> historicoResults) {
+
+        if (historicoResults.isEmpty()){
+            TableRow tr = new TableRow(this);
             tr.setPadding(8, 12, 8, 12);
 
-            if (i%2 == 1) tr.setBackgroundColor(Color.WHITE);
+            TextView txtMsg = new TextView(this);
+            txtMsg.setPadding(8, 0, 8,0);
+            txtMsg.setText("Nenhuma participação registrada");
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDateTime localDateTime = LocalDateTime.parse(historicoResponse.getResults().get(i).getData());
-            String data = localDateTime.format(formatter);
-
-            TextView txtData = new TextView(this);
-            txtData.setPadding(8, 0, 8,0);
-            txtData.setText(String.valueOf(data));
-
-            TextView txtPonto = new TextView(this);
-            txtPonto.setText(String.valueOf(historicoResponse.getResults().get(i).getPonto()));
-
-            tr.addView(txtData);
-            tr.addView(txtPonto);
+            tr.addView(txtMsg);
             registroPontos.addView(tr);
+        } else {
+
+            int size;
+            if (historicoResults.size() > 5){
+                size = 5;
+            }else {
+                size = historicoResults.size();
+            }
+
+            for(int i = 0; i < size; i++){
+                TableRow tr =  new TableRow(this);
+                tr.setPadding(8, 12, 8, 12);
+
+                if (i%2 == 1) tr.setBackgroundColor(Color.WHITE);
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDateTime localDateTime = LocalDateTime.parse(historicoResults.get(i).getData());
+                String data = localDateTime.format(formatter);
+
+                TextView txtData = new TextView(this);
+                txtData.setPadding(8, 0, 8,0);
+                txtData.setText(String.valueOf(data));
+
+                TextView txtPonto = new TextView(this);
+                txtPonto.setPadding(8, 0, 8,0);
+                txtPonto.setText(String.valueOf(historicoResults.get(i).getPonto()));
+
+                tr.addView(txtData);
+                tr.addView(txtPonto);
+                registroPontos.addView(tr);
+            }
         }
     }
-
 }
