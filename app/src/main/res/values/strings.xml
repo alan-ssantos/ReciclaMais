@@ -14,7 +14,7 @@
     <string name="senha">Senha</string>
     <string name="email">E-mail</string>
     <string name="nome">Nome</string>
-    <string name="coleta_do_dia">A próxima coleta é no dia 16/10/2019</string>
+    <string name="coleta_do_dia">Você participou de 0 coletas</string>
     <string name="bem_vindo">Bem vindo, Alan</string>
     <string name="pts">120 pts</string>
     <string name="hist_rico_recente">Histórico recente</string>
