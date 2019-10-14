@@ -1,122 +1,206 @@
-<ScrollView
+<ViewFlipper
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/main_background_color"
+    android:id="@+id/viewFlipper"
+    android:inAnimation="@android:anim/slide_in_left"
+    android:outAnimation="@android:anim/slide_out_right"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <!-- NOME -->
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/nome"/>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <EditText
-            style="@style/InputStyle"
-            android:id="@+id/edtNome" />
+            <ImageView
+            android:layout_width="@android:dimen/thumbnail_width"
+            android:layout_height="100dp"
+            android:src="@drawable/logo"
+            android:layout_gravity="center"
+            android:contentDescription="Logo" />
 
-        <!-- EMAIL -->
-        <TextView
-            android:layout_marginTop="16dp"
+            <!-- NOME -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nome"/>
+
+            <EditText
+                style="@style/InputStyle"
+                android:id="@+id/edtNome" />
+
+            <!-- EMAIL -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/email"/>
+
+            <EditText
+                style="@style/InputStyle"
+                android:inputType="textEmailAddress"
+                android:id="@+id/edtEmail"/>
+
+            <!-- CPF -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cpf"/>
+
+            <EditText
+                style="@style/InputStyle"
+                android:id="@+id/edtCpf"/>
+
+            <!-- SENHA -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/senha" />
+
+            <EditText
+                style="@style/InputStyle"
+                android:inputType="textPassword"
+                android:id="@+id/edtSenha"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="8dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="Cancelar"
+                    android:onClick="finalizar"/>
+
+                <Button
+                    style="@style/ButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:paddingHorizontal="16dp"
+                    android:textColor="#ffffff"
+                    android:text="Continuar"
+                    android:onClick="flipperProximo"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/email"/>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <EditText
-            style="@style/InputStyle"
-            android:inputType="textEmailAddress"
-            android:id="@+id/edtEmail"/>
+            <ImageView
+                android:layout_width="@android:dimen/thumbnail_width"
+                android:layout_height="100dp"
+                android:src="@drawable/logo"
+                android:layout_gravity="center"
+                android:contentDescription="Logo" />
 
-        <!-- SENHA -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/senha" />
+            <!-- CEP -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cep"/>
 
-        <EditText
-            style="@style/InputStyle"
-            android:inputType="textPassword"
-            android:id="@+id/edtSenha"/>
+            <EditText
+                style="@style/InputStyle"
+                android:inputType="numberDecimal"
+                android:id="@+id/edtCep"/>
 
-        <!-- CPF -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cpf"/>
+            <!-- RUA -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rua"/>
 
-        <EditText
-            style="@style/InputStyle"
-            android:id="@+id/edtCpf"/>
+            <EditText
+                style="@style/InputStyle"
+                android:id="@+id/edtRua"/>
 
-        <!-- CEP -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cep"/>
+            <!-- NUMERO -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/numero"/>
 
-        <EditText
-            style="@style/InputStyle"
-            android:id="@+id/edtCep"/>
+            <EditText
+                style="@style/InputStyle"
+                android:inputType="number"
+                android:id="@+id/edtNumero"/>
 
-        <!-- RUA -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/rua"/>
+            <!-- ESTADO -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/estado"/>
 
-        <EditText
-            style="@style/InputStyle"
-            android:id="@+id/edtRua"/>
+            <EditText
+                style="@style/InputStyle"
+                android:id="@+id/edtEstado"/>
 
-        <!-- NUMERO -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/numero"/>
+            <!-- CIDADE -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cidade"/>
 
-        <EditText
-            style="@style/InputStyle"
-            android:inputType="number"
-            android:id="@+id/edtNumero"/>
+            <EditText
+                style="@style/InputStyle"
+                android:id="@+id/edtCidade"/>
 
-        <!-- ESTADO -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/estado"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp">
 
-        <EditText
-            style="@style/InputStyle"
-            android:id="@+id/edtEstado"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="8dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="Voltar"
+                    android:onClick="flipperAnterior"/>
 
-        <!-- CIDADE -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cidade"/>
+                <Button
+                    style="@style/ButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:paddingHorizontal="16dp"
+                    android:textColor="#ffffff"
+                    android:text="Cadastrar"
+                    android:onClick="cadastrar"/>
 
-        <EditText
-            style="@style/InputStyle"
-            android:id="@+id/edtCidade"/>
+            </RelativeLayout>
 
-        <Button
-            style="@style/ButtonStyle"
-            android:layout_marginTop="20dp"
-            android:textColor="#ffffff"
-            android:text="@string/cadastrar"
-            android:onClick="cadastrar"/>
+        </LinearLayout>
 
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+
+</ViewFlipper>

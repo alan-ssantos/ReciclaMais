@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import org.json.JSONObject;
 
@@ -30,6 +31,8 @@ public class CadastroActivity extends AppCompatActivity {
     EditText edtEstado;
     EditText edtCidade;
 
+    ViewFlipper viewFlipper;
+
     CadastroResponse cadastroResponse;
 
     @Override
@@ -46,6 +49,8 @@ public class CadastroActivity extends AppCompatActivity {
         edtNumero = findViewById(R.id.edtNumero);
         edtEstado = findViewById(R.id.edtEstado);
         edtCidade = findViewById(R.id.edtCidade);
+
+        viewFlipper = findViewById(R.id.viewFlipper);
 
     }
 
@@ -93,4 +98,16 @@ public class CadastroActivity extends AppCompatActivity {
         return cadastroRequest;
     }
 
+    public void finalizar(View view) {
+        finish();
+    }
+
+    public void flipperAnterior(View view) {
+        viewFlipper.showPrevious();
+    }
+
+
+    public void flipperProximo(View view) {
+        viewFlipper.showNext();
+    }
 }
