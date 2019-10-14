@@ -1,20 +1,23 @@
-<RelativeLayout
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingVertical="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/txtUuid"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="16dp"/>
+        android:layout_weight="50"
+        android:layout_gravity="center"
+        android:id="@+id/txtUuid"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/txtData"
-        android:layout_toEndOf="@id/txtUuid"/>
+        android:layout_weight="50"
+        android:layout_marginStart="8dp"
+        android:layout_gravity="center"
+        android:id="@+id/txtData"/>
 
-
-</RelativeLayout>
+</LinearLayout>

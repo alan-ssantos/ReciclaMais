@@ -1,8 +1,8 @@
 package br.com.fiap.reciclamais.service;
 
-import br.com.fiap.reciclamais.model.LoginRequest;
-import br.com.fiap.reciclamais.model.GenericResponse;
-import br.com.fiap.reciclamais.model.LoginResult;
+import br.com.fiap.reciclamais.model.request.LoginRequest;
+import br.com.fiap.reciclamais.model.response.GenericResponse;
+import br.com.fiap.reciclamais.model.result.LoginResult;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;

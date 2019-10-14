@@ -1,4 +1,4 @@
-package br.com.fiap.reciclamais.model;
+package br.com.fiap.reciclamais.model.result;
 
 import java.util.List;
 

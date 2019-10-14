@@ -71,9 +71,7 @@ public class ScannerActivity extends AppCompatActivity {
             }
 
             lastTxt = result.getText();
-
-            resource.inserir(lastTxt);
-            exibeToast("Adicionado: " + lastTxt);
+            registrarColeta(result.getText());
         }
 
         @Override
@@ -129,17 +127,29 @@ public class ScannerActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    initScanner();
-                } else {
-                    exibeToast("Não foi possivel iniciar a camera");
-                }
-                return;
+        if (requestCode == MY_PERMISSIONS) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                initScanner();
+            } else {
+                exibeToast("Não foi possivel iniciar a camera");
             }
         }
+    }
+
+    public void registrarColeta(String uuid){
+        if(!uuid.matches("[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")){
+            exibeToast("Código inválido!");
+            return;
+        }
+        if (resource.verificaDuplicidade(uuid)){
+            exibeToast("Este usuário já foi adicionado");
+            return;
+        }
+
+
+        exibeToast("Acionado com sucesso!");
+        resource.inserir(uuid);
     }
 
     public void exibeToast(String msg){
