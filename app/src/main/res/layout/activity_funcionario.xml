@@ -2,36 +2,57 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@drawable/main_background_color"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:text=""
+        style="@style/TitleStyle"
+        android:text="Alan"
         android:id="@+id/txtFuncNome"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Está pronto para começar?"
-        android:layout_marginBottom="16dp"
+        style="@style/SubtitleStyle"
         android:id="@+id/txtFuncDescricao"/>
 
-    <Button
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/escanear"
-        android:id="@+id/btnEscanear"
-        android:onClick="abrirScanner"/>
+        android:weightSum="2"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnEnviar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="abrirLista"
-        android:text="Enviar registros" />
+        <Button
+            android:id="@+id/btnEscanear"
+            android:padding="20dp"
+            android:layout_width="0dp"
+            style="@style/ButtonStyle"
+            android:layout_marginRight="6dp"
+            android:layout_height="150dp"
+            android:drawableTop="@drawable/icone_camera"
+            android:layout_weight="1"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:text="@string/escanear"
+            android:onClick="abrirScanner"/>
+
+        <Button
+            android:id="@+id/btnEnviar"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/icone_check"
+            android:onClick="abrirLista"
+            android:padding="20dp"
+            android:text="Enviar registros"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
 </LinearLayout>
