@@ -12,6 +12,34 @@ public class Usuario {
     private String estado;
     private String cidade;
 
+    //Construtor para Cadastrar
+    public Usuario(String nome, String email, String senha, String cpf, String cep, String rua, Integer numero, String estado, String cidade) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.cep = cep;
+        this.rua = rua;
+        this.numero = numero;
+        this.estado = estado;
+        this.cidade = cidade;
+    }
+
+    //Construtor para Alterar
+    public Usuario(String nome, String email, String senha, String cep, String rua, Integer numero, String estado, String cidade) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.cep = cep;
+        this.rua = rua;
+        this.numero = numero;
+        this.estado = estado;
+        this.cidade = cidade;
+    }
+
+    public Usuario() {
+    }
+
     public String getNome() {
         return nome;
     }

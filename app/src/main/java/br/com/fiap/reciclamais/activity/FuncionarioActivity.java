@@ -38,7 +38,7 @@ public class FuncionarioActivity extends AppCompatActivity {
     }
 
     private void carregaDados() {
-        Call<GenericResponse<UsuarioResult>> call = new RetrofitConfig().getUsuarioService().buscar(cpf);
+        Call<GenericResponse<UsuarioResult>> call = new RetrofitConfig().getUsuarioService().buscarPontuacao(cpf);
         call.enqueue(new Callback<GenericResponse<UsuarioResult>>() {
             @Override
             public void onResponse(Call<GenericResponse<UsuarioResult>> call, Response<GenericResponse<UsuarioResult>> response) {

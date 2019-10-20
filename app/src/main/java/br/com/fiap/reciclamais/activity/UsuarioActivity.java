@@ -59,14 +59,13 @@ public class UsuarioActivity extends AppCompatActivity {
     }
 
     public void buscarUsuario() {
-        Call<GenericResponse<UsuarioResult>> call = new RetrofitConfig().getUsuarioService().buscar(cpf);
+        Call<GenericResponse<UsuarioResult>> call = new RetrofitConfig().getUsuarioService().buscarPontuacao(cpf);
         call.enqueue(new Callback<GenericResponse<UsuarioResult>>() {
 
             @Override
             public void onResponse(Call<GenericResponse<UsuarioResult>> call, Response<GenericResponse<UsuarioResult>> response) {
                 if(response.isSuccessful()){
                     usuarioResponse = response.body();
-
                     txtNome.setText(usuarioResponse.getResults().getNome());
                     txtPontuacao.setText(usuarioResponse.getResults().getPontuacaoTotal().toString());
                     txtDescricao.setText("Você participou de " + String.valueOf(usuarioResponse.getResults().getReciclagemTotal()) + " coletas");
@@ -162,6 +161,8 @@ public class UsuarioActivity extends AppCompatActivity {
     }
 
     public void abrirEditarUsuario(View view) {
-        startActivity(new Intent(UsuarioActivity.this, EditarUsuarioActivity.class));
+        Intent intent = new Intent(UsuarioActivity.this, EditarUsuarioActivity.class);
+        intent.putExtra("cpf", cpf);
+        startActivity(intent);
     }
 }

@@ -15,11 +15,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import br.com.fiap.reciclamais.R;
-import br.com.fiap.reciclamais.model.request.CadastroRequest;
-import br.com.fiap.reciclamais.model.response.CadastroResponse;
+import br.com.fiap.reciclamais.model.Usuario;
 import br.com.fiap.reciclamais.model.response.EnderecoResponse;
 import br.com.fiap.reciclamais.model.response.GenericResponse;
-import br.com.fiap.reciclamais.model.result.UsuarioResult;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
 import br.com.fiap.reciclamais.retrofit.ViaCep;
 import br.com.fiap.reciclamais.utils.mask.MaskEditUtil;
@@ -41,7 +39,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     ViewFlipper viewFlipper;
 
-    CadastroResponse cadastroResponse;
+    GenericResponse<String> cadastroResponse;
     EnderecoResponse enderecoResponse;
 
     @Override
@@ -74,16 +72,14 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void cadastrar(View view) {
-        CadastroRequest request = setCadastroRequest();
+        Usuario request = setCadastroRequest();
 
-        if (request == null){
-            return;
-        }
+        if (request == null) return;
 
-        Call<CadastroResponse> call = new RetrofitConfig().getCadastroService().cadastrar(request);
-        call.enqueue(new Callback<CadastroResponse>() {
+        Call<GenericResponse<String>> call = new RetrofitConfig().getUsuarioService().cadastrar(request);
+        call.enqueue(new Callback<GenericResponse<String>>() {
             @Override
-            public void onResponse(Call<CadastroResponse> call, Response<CadastroResponse> response) {
+            public void onResponse(Call<GenericResponse<String>> call, Response<GenericResponse<String>> response) {
                 if(response.isSuccessful()){
                     cadastroResponse = response.body();
                     exibeToast(cadastroResponse.getResults());
@@ -99,33 +95,27 @@ public class CadastroActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<CadastroResponse> call, Throwable t) {
+            public void onFailure(Call<GenericResponse<String>> call, Throwable t) {
                 Log.d("err", t.getMessage());
             }
         });
     }
 
-    private CadastroRequest setCadastroRequest(){
-        CadastroRequest cadastroRequest = new CadastroRequest();
+    private Usuario setCadastroRequest(){
+        Usuario usuario = new Usuario();
 
         if (validaDadosPessoais() && validaEndereco()){
-            cadastroRequest.setNome(edtNome.getText().toString().trim());
-            cadastroRequest.setEmail(edtEmail.getText().toString().trim());
-            cadastroRequest.setSenha(edtSenha.getText().toString());
-            cadastroRequest.setCpf(MaskEditUtil.unmask(edtCpf.getText().toString().trim()));
-            cadastroRequest.setCep(MaskEditUtil.unmask(edtCep.getText().toString().trim()));
-            cadastroRequest.setRua(edtRua.getText().toString().trim());
-            int numero;
-            if (edtNumero.getText().toString().trim().isEmpty()){
-                numero = 0;
-            } else {
-                numero = Integer.parseInt(edtNumero.getText().toString().trim());
-            }
-            cadastroRequest.setNumero(numero);
-            cadastroRequest.setEstado(edtEstado.getText().toString().trim());
-            cadastroRequest.setCidade(edtCidade.getText().toString().trim());
+            usuario.setNome(edtNome.getText().toString().trim());
+            usuario.setEmail(edtEmail.getText().toString().trim());
+            usuario.setSenha(edtSenha.getText().toString());
+            usuario.setCpf(MaskEditUtil.unmask(edtCpf.getText().toString().trim()));
+            usuario.setCep(MaskEditUtil.unmask(edtCep.getText().toString().trim()));
+            usuario.setRua(edtRua.getText().toString().trim());
+            usuario.setNumero(Integer.parseInt(edtNumero.getText().toString().trim()));
+            usuario.setEstado(edtEstado.getText().toString().trim());
+            usuario.setCidade(edtCidade.getText().toString().trim());
 
-            return cadastroRequest;
+            return usuario;
         }
 
         return null;
@@ -228,7 +218,7 @@ public class CadastroActivity extends AppCompatActivity {
             exibeToast("Insira uma senha");
             return false;
         }
-        
+
         return true;
     }
 
@@ -249,7 +239,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         //Validação de Estado
         String estado = edtEstado.getText().toString().trim();
-        if (estado.isEmpty() || estado.length() < 4){
+        if (estado.isEmpty() || estado.length() < 2){
             exibeToast("Insira um Estado válido");
             return false;
         }
@@ -263,4 +253,5 @@ public class CadastroActivity extends AppCompatActivity {
 
         return true;
     }
+
 }
