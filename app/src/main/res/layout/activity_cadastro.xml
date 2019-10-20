@@ -1,5 +1,4 @@
-<ViewFlipper
-    android:layout_width="match_parent"
+<ViewFlipper android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/viewFlipper"
     android:inAnimation="@android:anim/slide_in_left"
@@ -31,6 +30,8 @@
 
             <EditText
                 style="@style/InputStyle"
+                android:singleLine="true"
+                android:lines="1"
                 android:id="@+id/edtNome" />
 
             <!-- EMAIL -->
@@ -54,6 +55,9 @@
 
             <EditText
                 style="@style/InputStyle"
+                android:singleLine="true"
+                android:lines="1"
+                android:inputType="numberDecimal"
                 android:id="@+id/edtCpf"/>
 
             <!-- SENHA -->

@@ -38,6 +38,7 @@
 
         <EditText
             style="@style/InputStyle"
+            android:inputType="textPassword"
             android:id="@+id/edtLoSenha"/>
 
         <Button
@@ -45,6 +46,7 @@
             android:layout_marginTop="20dp"
             android:textColor="#ffffff"
             android:text="Entrar"
+            android:id="@+id/btnEntrar"
             android:onClick="logar"/>
 
         <TextView

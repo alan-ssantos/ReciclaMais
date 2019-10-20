@@ -1,0 +1,120 @@
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="@android:dimen/thumbnail_width"
+            android:layout_height="100dp"
+            android:src="@drawable/logo"
+            android:layout_gravity="center"
+            android:contentDescription="@string/logotipo_reciclamais" />
+
+        <!-- NOME -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nome"/>
+
+        <EditText
+            style="@style/InputStyle"
+            android:id="@+id/edtNome" />
+
+        <!-- EMAIL -->
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email"/>
+
+        <EditText
+            style="@style/InputStyle"
+            android:inputType="textEmailAddress"
+            android:id="@+id/edtEmail"/>
+
+        <!-- SENHA -->
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/senha" />
+
+        <EditText
+            style="@style/InputStyle"
+            android:inputType="textPassword"
+            android:id="@+id/edtSenha"/>
+
+        <!-- CEP -->
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cep"/>
+
+        <EditText
+            style="@style/InputStyle"
+            android:inputType="numberDecimal"
+            android:id="@+id/edtCep"/>
+
+        <!-- RUA -->
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rua"/>
+
+        <EditText
+            style="@style/InputStyle"
+            android:id="@+id/edtRua"/>
+
+        <!-- NUMERO -->
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/numero"/>
+
+        <EditText
+            style="@style/InputStyle"
+            android:inputType="number"
+            android:id="@+id/edtNumero"/>
+
+        <!-- ESTADO -->
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/estado"/>
+
+        <EditText
+            style="@style/InputStyle"
+            android:id="@+id/edtEstado"/>
+
+        <!-- CIDADE -->
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cidade"/>
+
+        <EditText
+            style="@style/InputStyle"
+            android:id="@+id/edtCidade"/>
+
+        <Button
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="#fff"
+            android:text="Salvar"/>
+
+    </LinearLayout>
+
+</ScrollView>

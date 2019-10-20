@@ -26,7 +26,7 @@ import retrofit2.Response;
 public class ListarRegistrosActivity extends AppCompatActivity {
 
     List<Registro> registros;
-    ScannerRepository resource;
+    ScannerRepository repository;
     ListView lstRegistros;
     GenericResponse<RegistroResult> registroResponse;
 
@@ -36,9 +36,9 @@ public class ListarRegistrosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listar_registros);
 
         lstRegistros = findViewById(R.id.lstRegistros);
-        resource = new ScannerRepository(this);
+        repository = new ScannerRepository(this);
 
-        registros = resource.listar();
+        registros = repository.listar();
 
         RegistrosAdapter registrosAdapter = new RegistrosAdapter(this, registros);
 
@@ -76,7 +76,6 @@ public class ListarRegistrosActivity extends AppCompatActivity {
     }
 
     private void limparListar(){
-
-        resource.limpar();
+        repository.limpar();
     }
 }

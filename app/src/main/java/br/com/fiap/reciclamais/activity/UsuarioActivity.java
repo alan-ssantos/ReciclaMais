@@ -1,8 +1,10 @@
 package br.com.fiap.reciclamais.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ public class UsuarioActivity extends AppCompatActivity {
     TableLayout registroPontos;
     TextView txtNome;
     TextView txtPontuacao;
+    TextView txtDescricao;
 
     String cpf;
     GenericResponse<UsuarioResult> usuarioResponse;
@@ -47,6 +50,7 @@ public class UsuarioActivity extends AppCompatActivity {
 
         txtNome = findViewById(R.id.txtUsuarioNome);
         txtPontuacao = findViewById(R.id.txtUsuarioPontuacao);
+        txtDescricao = findViewById(R.id.txtUsuarioMsg);
 
         cpf = this.getIntent().getExtras().getString("cpf");
 
@@ -65,6 +69,7 @@ public class UsuarioActivity extends AppCompatActivity {
 
                     txtNome.setText(usuarioResponse.getResults().getNome());
                     txtPontuacao.setText(usuarioResponse.getResults().getPontuacaoTotal().toString());
+                    txtDescricao.setText("Você participou de " + String.valueOf(usuarioResponse.getResults().getReciclagemTotal()) + " coletas");
 
                 } else {
                     try {
@@ -154,5 +159,9 @@ public class UsuarioActivity extends AppCompatActivity {
                 registroPontos.addView(tr);
             }
         }
+    }
+
+    public void abrirEditarUsuario(View view) {
+        startActivity(new Intent(UsuarioActivity.this, EditarUsuarioActivity.class));
     }
 }

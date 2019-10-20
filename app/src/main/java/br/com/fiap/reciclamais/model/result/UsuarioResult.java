@@ -1,5 +1,7 @@
 package br.com.fiap.reciclamais.model.result;
 
+import java.io.Serializable;
+
 public class UsuarioResult {
 
     private String nome;

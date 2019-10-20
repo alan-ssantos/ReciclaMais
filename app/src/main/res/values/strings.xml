@@ -19,4 +19,10 @@
     <string name="pts">120 pts</string>
     <string name="hist_rico_recente">Histórico recente</string>
     <string name="trocar_pontos">Trocar pontos</string>
+    <string name="title_activity_teste_navigation">TesteNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="logotipo_reciclamais">Logotipo ReciclaMais</string>
+    <string name="field_required">Este campo é obrigatório</string>
 </resources>

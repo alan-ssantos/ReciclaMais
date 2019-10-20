@@ -5,6 +5,12 @@
     android:background="@drawable/main_background_color"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginVertical="24dp">
+
     <TextView
         android:id="@+id/txtUsuarioNome"
         android:text="@string/bem_vindo"
@@ -20,6 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:paddingVertical="20dp"
@@ -114,5 +122,11 @@
         </TableRow>
 
     </TableLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Editar"
+        android:onClick="abrirEditarUsuario"/>
 
 </LinearLayout>
