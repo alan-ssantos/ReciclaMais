@@ -32,13 +32,13 @@
     <RelativeLayout
         android:paddingVertical="20dp"
         style="@style/BoxStyle"
+        android:gravity="center"
         android:layout_marginTop="20dp">
 
         <ImageView
             android:id="@+id/imgIcon"
             android:layout_width="74dp"
             android:layout_height="82dp"
-            android:layout_marginStart="60dp"
             android:src="@drawable/icone_ponto">
         </ImageView>
 
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/imgIcon"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="73dp"
+            android:layout_marginStart="70dp"
             android:layout_marginTop="5dp"
             android:text="@string/pts"
             android:textColor="#19b08f"
@@ -60,6 +60,7 @@
     <RelativeLayout
         android:paddingVertical="20dp"
         style="@style/ButtonStyle"
+        android:gravity="center"
         android:layout_marginTop="20dp">
 
         <ImageView
@@ -75,13 +76,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/trocar_pontos"
-            android:layout_marginStart="90dp"
             android:paddingStart="60dp"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold">
         </TextView>
     </RelativeLayout>
+
+    <Button
+        style="@style/InputStyle"
+        android:layout_marginTop="16dp"
+        android:textColor="#19b08f"
+        android:text="@string/editar"
+        android:onClick="abrirEditarUsuario"/>
 
     <TextView
         android:id="@+id/txtUsuarioColeta"
@@ -122,11 +129,5 @@
         </TableRow>
 
     </TableLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Editar"
-        android:onClick="abrirEditarUsuario"/>
 
 </LinearLayout>

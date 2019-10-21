@@ -1,0 +1,242 @@
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/main_background_color"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtUsuarioNome"
+            android:text="@string/bem_vindo"
+            style="@style/TitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <RelativeLayout
+            android:paddingVertical="8dp"
+            style="@style/BoxStyle"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/imgIcon"
+                android:layout_width="34dp"
+                android:layout_height="52dp"
+                android:src="@drawable/icone_ponto">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/txtUsuarioPontuacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/imgIcon"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/pts"
+                android:textColor="#19b08f"
+                android:textSize="28sp"
+                android:textStyle="bold">
+            </TextView>
+        </RelativeLayout>
+
+        <LinearLayout
+            style="@style/BoxStyle"
+            android:orientation="vertical"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:id="@+id/imgThumb"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="#f6d92a"
+                android:src="@drawable/logo99">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/txtVoucherTitle"
+                style="@style/TitleStyle"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:text="10% OFF na próxima corrida">
+            </TextView>
+
+            <View
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/txtVoucherInfo"
+                style="@style/SubtitleStyle"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="160 pts."
+                android:textColor="#19b08f"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                android:id="@+id/txtVoucherSubtitle"
+                style="@style/SubtitleStyle"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Código válido até 29/10/2020">
+            </TextView>
+
+            <Button
+                style="@style/ButtonStyle"
+                android:id="@+id/btnTrocarPonto"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:textColor="#ffffff"
+                android:text="Trocar pontos"
+                android:onClick="trocarPontos"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/BoxStyle"
+            android:orientation="vertical"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="#ea1d2c"
+                android:src="@drawable/logoifood">
+            </ImageView>
+
+            <TextView
+                style="@style/TitleStyle"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:text="15% OFF no próximo pedido">
+            </TextView>
+
+            <View
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                style="@style/SubtitleStyle"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="160 pts."
+                android:textColor="#19b08f"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                style="@style/SubtitleStyle"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Código válido até 29/10/2020">
+            </TextView>
+
+            <Button
+                style="@style/ButtonStyle"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:textColor="#ffffff"
+                android:text="Trocar pontos"
+                android:onClick="trocarPontos"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/BoxStyle"
+            android:orientation="vertical"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="#ffcb00"
+                android:src="@drawable/logoyellow">
+            </ImageView>
+
+            <TextView
+                style="@style/TitleStyle"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:text="20% OFF na próxima corrida">
+            </TextView>
+
+            <View
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                style="@style/SubtitleStyle"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="160 pts."
+                android:textColor="#19b08f"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                style="@style/SubtitleStyle"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Código válido até 29/10/2020">
+            </TextView>
+
+            <Button
+                style="@style/ButtonStyle"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:textColor="#ffffff"
+                android:text="Trocar pontos"
+                android:onClick="trocarPontos"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+</ScrollView>
