@@ -43,18 +43,23 @@ public class ListarRegistrosActivity extends AppCompatActivity {
 
     public void salvar(View view) {
 
-        Call<GenericResponse<RegistroResult>> call = new RetrofitConfig().getRegistroService().registrar(registros);
+        if (registros == null){
+            exibeToast("Nenhuma registro a ser salvo");
+            return;
+        }
+
+        Call<GenericResponse<RegistroResult>> call = new RetrofitConfig().getPontuacaoService().registrar(registros);
 
         call.enqueue(new Callback<GenericResponse<RegistroResult>>() {
             @Override
             public void onResponse(Call<GenericResponse<RegistroResult>> call, Response<GenericResponse<RegistroResult>> response) {
                 if(response.isSuccessful()){
                     registroResponse = response.body();
-                    Toast.makeText(ListarRegistrosActivity.this, registroResponse.getResults().getDescricao(), Toast.LENGTH_SHORT).show();
+                    exibeToast(registroResponse.getResults().getDescricao());
                 } else {
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
-                        Toast.makeText(ListarRegistrosActivity.this, jsonError.getString("descricao"), Toast.LENGTH_SHORT).show();
+                        exibeToast(jsonError.getString("descricao"));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -65,7 +70,6 @@ public class ListarRegistrosActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<GenericResponse<RegistroResult>> call, Throwable t) {
                 Log.d("err", t.getMessage());
-
             }
         });
     }
@@ -79,6 +83,10 @@ public class ListarRegistrosActivity extends AppCompatActivity {
     private void limparListar(){
         repository.limpar();
         atualizaLista();
+    }
+
+    private void exibeToast(String texto){
+        Toast.makeText(this, texto, Toast.LENGTH_SHORT).show();
     }
 
 }

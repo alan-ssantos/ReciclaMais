@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.TrocarPontoActivity"></activity>
         <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
@@ -45,6 +44,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.EditarUsuarioActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.TrocarPontoActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

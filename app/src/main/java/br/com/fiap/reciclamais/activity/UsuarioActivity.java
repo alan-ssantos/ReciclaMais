@@ -89,7 +89,7 @@ public class UsuarioActivity extends AppCompatActivity {
 
 
     public void buscaHistorico(){
-        Call<GenericResponse<List<HistoricoResult>>> call = new RetrofitConfig().getHistoricoService().buscar(cpf);
+        Call<GenericResponse<List<HistoricoResult>>> call = new RetrofitConfig().getPontuacaoService().buscar(cpf);
         call.enqueue(new Callback<GenericResponse<List<HistoricoResult>>>() {
 
             @Override
@@ -160,8 +160,21 @@ public class UsuarioActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        buscarUsuario();
+    }
+
     public void abrirEditarUsuario(View view) {
         Intent intent = new Intent(UsuarioActivity.this, EditarUsuarioActivity.class);
+        intent.putExtra("cpf", cpf);
+        startActivity(intent);
+    }
+
+
+    public void abrirTrocarPontos(View view) {
+        Intent intent = new Intent(UsuarioActivity.this, TrocarPontoActivity.class);
         intent.putExtra("cpf", cpf);
         startActivity(intent);
     }

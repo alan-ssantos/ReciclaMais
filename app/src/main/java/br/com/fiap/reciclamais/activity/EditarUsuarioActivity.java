@@ -117,7 +117,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<GenericResponse<String>> call, Response<GenericResponse<String>> response) {
                 if (response.isSuccessful()){
-                    finalizar();
+                    finish();
                 } else{
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
@@ -255,20 +255,6 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         edtCidade.setText(response.getLocalidade());
     }
 
-    private void abrirPerfil(PerfilEnum perfil){
-        Intent intent;
-        switch (perfil){
-            case CLIENTE: intent = new Intent(activity, UsuarioActivity.class); break;
-            case FUNCIONARIO: intent =  new Intent(activity, FuncionarioActivity.class); break;
-            default: throw new IllegalStateException("Unexpected value: " + perfil);
-        }
-
-        intent.putExtra("cpf", cpf);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
-
     public void deletarConta(View view){
         Call<GenericResponse<String>> call = new RetrofitConfig().getUsuarioService().deletar(cpf);
         call.enqueue(new Callback<GenericResponse<String>>() {
@@ -288,7 +274,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
 
     private void finalizar(){
         Intent intent = new Intent(EditarUsuarioActivity.this, LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         finish();
         startActivity(intent);
     }

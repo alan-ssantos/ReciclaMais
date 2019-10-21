@@ -79,7 +79,8 @@
             android:paddingStart="60dp"
             android:textColor="#ffffff"
             android:textSize="20sp"
-            android:textStyle="bold">
+            android:textStyle="bold"
+            android:onClick="abrirTrocarPontos">
         </TextView>
     </RelativeLayout>
 
