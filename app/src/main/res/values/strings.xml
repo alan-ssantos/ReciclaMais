@@ -25,5 +25,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="logotipo_reciclamais">Logotipo ReciclaMais</string>
     <string name="field_required">Este campo é obrigatório</string>
-    <string name="editar">Editar usuário</string>
+    <string name="editar"><u>Editar usuário</u></string>
 </resources>
