@@ -1,7 +1,10 @@
 package br.com.fiap.reciclamais.service;
 
 import br.com.fiap.reciclamais.model.Usuario;
+import br.com.fiap.reciclamais.model.request.LoginRequest;
 import br.com.fiap.reciclamais.model.response.GenericResponse;
+import br.com.fiap.reciclamais.model.result.LoginResult;
+import br.com.fiap.reciclamais.model.result.UsuarioLoginResult;
 import br.com.fiap.reciclamais.model.result.UsuarioResult;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -14,19 +17,21 @@ import retrofit2.http.Path;
 public interface UsuarioService {
 
     @GET("usuario/{cpf}")
-    Call<GenericResponse<Usuario>> buscarUsuario(@Path("cpf") String request);
+    Call<GenericResponse<UsuarioResult>> buscarUsuario(@Path("cpf") String request);
 
     @GET("pontuacao/{cpf}")
-    Call<GenericResponse<UsuarioResult>> buscarPontuacao(@Path("cpf") String request);
+    Call<GenericResponse<UsuarioLoginResult>> buscarPontuacao(@Path("cpf") String request);
 
-    @POST("cadastrar")
+    @POST("usuario/cadastrar")
     Call<GenericResponse<String>> cadastrar(@Body Usuario request);
 
+    @POST("usuario/login")
+    Call<GenericResponse<LoginResult>> login (@Body LoginRequest request);
 
-    @PATCH("alterar/{cpf}")
-    Call<GenericResponse<String>> alterar(Usuario usuario);
+    @PATCH("usuario/atualizar")
+    Call<GenericResponse<String>> atualizar(@Body Usuario usuario);
 
-    @DELETE("deletar/{cpf}")
+    @DELETE("usuario/{cpf}")
     Call<GenericResponse<String>> deletar(@Path("cpf") String request);
 
 }

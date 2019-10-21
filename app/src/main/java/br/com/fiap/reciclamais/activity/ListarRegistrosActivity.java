@@ -38,11 +38,7 @@ public class ListarRegistrosActivity extends AppCompatActivity {
         lstRegistros = findViewById(R.id.lstRegistros);
         repository = new ScannerRepository(this);
 
-        registros = repository.listar();
-
-        RegistrosAdapter registrosAdapter = new RegistrosAdapter(this, registros);
-
-        lstRegistros.setAdapter(registrosAdapter);
+        atualizaLista();
     }
 
     public void salvar(View view) {
@@ -63,6 +59,7 @@ public class ListarRegistrosActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+                limparListar();
             }
 
             @Override
@@ -71,11 +68,17 @@ public class ListarRegistrosActivity extends AppCompatActivity {
 
             }
         });
+    }
 
-        limparListar();
+    private void atualizaLista(){
+        registros = repository.listar();
+        RegistrosAdapter registrosAdapter = new RegistrosAdapter(this, registros);
+        lstRegistros.setAdapter(registrosAdapter);
     }
 
     private void limparListar(){
         repository.limpar();
+        atualizaLista();
     }
+
 }

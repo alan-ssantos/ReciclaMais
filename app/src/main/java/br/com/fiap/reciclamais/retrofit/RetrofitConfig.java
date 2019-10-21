@@ -1,7 +1,6 @@
 package br.com.fiap.reciclamais.retrofit;
 
 import br.com.fiap.reciclamais.service.HistoricoService;
-import br.com.fiap.reciclamais.service.LoginService;
 import br.com.fiap.reciclamais.service.RegistrosService;
 import br.com.fiap.reciclamais.service.UsuarioService;
 import retrofit2.Retrofit;
@@ -13,7 +12,7 @@ public class RetrofitConfig {
 
     public RetrofitConfig(){
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.101:8080/")
+                .baseUrl("https://api-reciclamais.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
@@ -22,14 +21,9 @@ public class RetrofitConfig {
         return this.retrofit.create(UsuarioService.class);
     }
 
-    public LoginService getLoginService(){
-        return this.retrofit.create(LoginService.class);
-    }
-
     public RegistrosService getRegistroService(){
         return this.retrofit.create(RegistrosService.class);
     }
-
 
     public HistoricoService getHistoricoService(){
         return this.retrofit.create(HistoricoService.class);

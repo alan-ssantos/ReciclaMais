@@ -12,7 +12,6 @@ public class Usuario {
     private String estado;
     private String cidade;
 
-    //Construtor para Cadastrar
     public Usuario(String nome, String email, String senha, String cpf, String cep, String rua, Integer numero, String estado, String cidade) {
         this.nome = nome;
         this.email = email;
@@ -25,7 +24,6 @@ public class Usuario {
         this.cidade = cidade;
     }
 
-    //Construtor para Alterar
     public Usuario(String nome, String email, String senha, String cep, String rua, Integer numero, String estado, String cidade) {
         this.nome = nome;
         this.email = email;

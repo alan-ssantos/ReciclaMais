@@ -19,6 +19,7 @@ import br.com.fiap.reciclamais.R;
 import br.com.fiap.reciclamais.model.Usuario;
 import br.com.fiap.reciclamais.model.response.EnderecoResponse;
 import br.com.fiap.reciclamais.model.response.GenericResponse;
+import br.com.fiap.reciclamais.model.result.UsuarioResult;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
 import br.com.fiap.reciclamais.retrofit.ViaCep;
 import br.com.fiap.reciclamais.utils.enums.PerfilEnum;
@@ -42,7 +43,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
 
     Activity activity = EditarUsuarioActivity.this;
 
-    GenericResponse<Usuario> usuarioResponse;
+    GenericResponse<UsuarioResult> usuarioResponse;
     EnderecoResponse enderecoResponse;
 
     @Override
@@ -68,26 +69,14 @@ public class EditarUsuarioActivity extends AppCompatActivity {
 
         cpf = this.getIntent().getExtras().getString("cpf");
 
-        Usuario user = new Usuario();
-        user.setNome("Felipe Nadroga");
-        user.setEmail("nadroga@email.com");
-        user.setSenha("123");
-        user.setCep("08072155");
-        user.setRua("Belo Horizonte");
-        user.setNumero(1);
-        user.setEstado("São Paulo");
-        user.setCidade("Guarulhos");
-
-        //buscaUsuario();
-
-        preencherInputs(user);
+        buscaUsuario();
     }
 
     private void buscaUsuario() {
-        Call<GenericResponse<Usuario>> call = new RetrofitConfig().getUsuarioService().buscarUsuario(cpf);
-        call.enqueue(new Callback<GenericResponse<Usuario>>() {
+        Call<GenericResponse<UsuarioResult>> call = new RetrofitConfig().getUsuarioService().buscarUsuario(cpf);
+        call.enqueue(new Callback<GenericResponse<UsuarioResult>>() {
             @Override
-            public void onResponse(Call<GenericResponse<Usuario>> call, Response<GenericResponse<Usuario>> response) {
+            public void onResponse(Call<GenericResponse<UsuarioResult>> call, Response<GenericResponse<UsuarioResult>> response) {
                 if (response.isSuccessful()){
                     usuarioResponse = response.body();
                     preencherInputs(usuarioResponse.getResults());
@@ -101,34 +90,34 @@ public class EditarUsuarioActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<GenericResponse<Usuario>> call, Throwable t) {
+            public void onFailure(Call<GenericResponse<UsuarioResult>> call, Throwable t) {
                 Log.d("err", t.getMessage());
             }
         });
     }
 
 
-    private void preencherInputs(Usuario usuario){
+    private void preencherInputs(UsuarioResult usuario){
        edtNome.setText(usuario.getNome());
        edtEmail.setText(usuario.getEmail());
        edtSenha.setText(usuario.getSenha());
-       edtCep.setText(usuario.getCep());
-       edtRua.setText(usuario.getRua());
-       edtNumero.setText(String.valueOf(usuario.getNumero()));
-       edtEstado.setText(usuario.getEstado());
-       edtCidade.setText(usuario.getCidade());
+       edtCep.setText(usuario.getEndereco().getCep());
+       edtRua.setText(usuario.getEndereco().getRua());
+       edtNumero.setText(String.valueOf(usuario.getEndereco().getNumero()));
+       edtEstado.setText(usuario.getEndereco().getEstado());
+       edtCidade.setText(usuario.getEndereco().getCidade());
     }
 
     public void salvarAlteracoes(View view) {
         Usuario request = setUsuarioRequest();
         if (request == null) return;
 
-        Call<GenericResponse<String>> call = new RetrofitConfig().getUsuarioService().alterar(request);
+        Call<GenericResponse<String>> call = new RetrofitConfig().getUsuarioService().atualizar(request);
         call.enqueue(new Callback<GenericResponse<String>>() {
             @Override
             public void onResponse(Call<GenericResponse<String>> call, Response<GenericResponse<String>> response) {
                 if (response.isSuccessful()){
-
+                    finalizar();
                 } else{
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
@@ -152,6 +141,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         if (validaDadosPessoais() && validaEndereco()){
             usuario.setNome(edtNome.getText().toString().trim());
             usuario.setEmail(edtEmail.getText().toString().trim());
+            usuario.setCpf(cpf);
             usuario.setSenha(edtSenha.getText().toString());
             usuario.setCep(MaskEditUtil.unmask(edtCep.getText().toString().trim()));
             usuario.setRua(edtRua.getText().toString().trim());
@@ -267,7 +257,6 @@ public class EditarUsuarioActivity extends AppCompatActivity {
 
     private void abrirPerfil(PerfilEnum perfil){
         Intent intent;
-
         switch (perfil){
             case CLIENTE: intent = new Intent(activity, UsuarioActivity.class); break;
             case FUNCIONARIO: intent =  new Intent(activity, FuncionarioActivity.class); break;
@@ -280,12 +269,13 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         finish();
     }
 
-    public void deletarConta(){
+    public void deletarConta(View view){
         Call<GenericResponse<String>> call = new RetrofitConfig().getUsuarioService().deletar(cpf);
         call.enqueue(new Callback<GenericResponse<String>>() {
             @Override
             public void onResponse(Call<GenericResponse<String>> call, Response<GenericResponse<String>> response) {
-                exibeToast(response.body().getResults());
+                String result = response.body().getResults();
+                exibeToast(result);
                 finalizar();
             }
 
@@ -297,13 +287,14 @@ public class EditarUsuarioActivity extends AppCompatActivity {
     }
 
     private void finalizar(){
-        Intent intent = new Intent(activity, LoginActivity.class);
+        Intent intent = new Intent(EditarUsuarioActivity.this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
         finish();
+        startActivity(intent);
     }
 
     private void exibeToast(String texto){
         Toast.makeText(this, texto, Toast.LENGTH_SHORT).show();
     }
+
 }

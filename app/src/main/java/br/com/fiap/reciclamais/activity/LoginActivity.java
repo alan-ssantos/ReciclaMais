@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        Call<GenericResponse<LoginResult>> call = new RetrofitConfig().getLoginService().login(loginRequest);
+        Call<GenericResponse<LoginResult>> call = new RetrofitConfig().getUsuarioService().login(loginRequest);
         call.enqueue(new Callback<GenericResponse<LoginResult>>() {
             @Override
             public void onResponse(Call<GenericResponse<LoginResult>> call, Response<GenericResponse<LoginResult>> response) {

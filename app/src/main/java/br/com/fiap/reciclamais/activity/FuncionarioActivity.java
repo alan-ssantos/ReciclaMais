@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 import br.com.fiap.reciclamais.R;
 import br.com.fiap.reciclamais.model.response.GenericResponse;
-import br.com.fiap.reciclamais.model.result.UsuarioResult;
+import br.com.fiap.reciclamais.model.result.UsuarioLoginResult;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,7 +20,7 @@ import retrofit2.Response;
 
 public class FuncionarioActivity extends AppCompatActivity {
 
-    GenericResponse<UsuarioResult> usuarioResponse;
+    GenericResponse<UsuarioLoginResult> usuarioResponse;
     TextView txtNome;
     TextView txtMensagem;
     String cpf;
@@ -38,10 +38,10 @@ public class FuncionarioActivity extends AppCompatActivity {
     }
 
     private void carregaDados() {
-        Call<GenericResponse<UsuarioResult>> call = new RetrofitConfig().getUsuarioService().buscarPontuacao(cpf);
-        call.enqueue(new Callback<GenericResponse<UsuarioResult>>() {
+        Call<GenericResponse<UsuarioLoginResult>> call = new RetrofitConfig().getUsuarioService().buscarPontuacao(cpf);
+        call.enqueue(new Callback<GenericResponse<UsuarioLoginResult>>() {
             @Override
-            public void onResponse(Call<GenericResponse<UsuarioResult>> call, Response<GenericResponse<UsuarioResult>> response) {
+            public void onResponse(Call<GenericResponse<UsuarioLoginResult>> call, Response<GenericResponse<UsuarioLoginResult>> response) {
                 if (response.isSuccessful()){
                     usuarioResponse = response.body();
                     txtNome.setText(usuarioResponse.getResults().getNome());
@@ -56,7 +56,7 @@ public class FuncionarioActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<GenericResponse<UsuarioResult>> call, Throwable t) {
+            public void onFailure(Call<GenericResponse<UsuarioLoginResult>> call, Throwable t) {
 
             }
         });
