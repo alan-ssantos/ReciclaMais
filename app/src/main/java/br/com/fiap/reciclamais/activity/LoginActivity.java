@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtSenha;
     Button btnEntrar;
 
+    private RelativeLayout spinner;
+
     GenericResponse<LoginResult> loginResponse;
     Activity activity = LoginActivity.this;
     LoginRequest loginRequest;
@@ -45,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         edtCPF.addTextChangedListener(MaskEditUtil.mask(edtCPF, MaskEditUtil.FORMAT_CPF));
         edtSenha = findViewById(R.id.edtLoSenha);
         btnEntrar = findViewById(R.id.btnEntrar);
+        spinner = findViewById(R.id.progressBar1);
+
     }
 
     public void logar(View view) {
@@ -57,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        spinner.setVisibility(View.VISIBLE);
+
         Call<GenericResponse<LoginResult>> call = new RetrofitConfig().getUsuarioService().login(loginRequest);
         call.enqueue(new Callback<GenericResponse<LoginResult>>() {
             @Override
@@ -64,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     loginResponse = response.body();
                     abrirPerfil(loginResponse.getResults().getPerfil());
+                    spinner.setVisibility(View.GONE);
                 } else {
                     try {
                         btnEntrar.setEnabled(true);
@@ -72,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    spinner.setVisibility(View.GONE);
                 }
             }
 
@@ -79,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<GenericResponse<LoginResult>> call, Throwable t) {
                 Log.d("err", t.getMessage());
                 btnEntrar.setEnabled(true);
+                spinner.setVisibility(View.GONE);
             }
         });
     }

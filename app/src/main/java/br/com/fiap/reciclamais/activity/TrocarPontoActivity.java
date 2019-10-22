@@ -3,6 +3,7 @@ package br.com.fiap.reciclamais.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import br.com.fiap.reciclamais.R;
 import br.com.fiap.reciclamais.model.Usuario;
+import br.com.fiap.reciclamais.model.request.TrocaRequest;
 import br.com.fiap.reciclamais.model.response.GenericResponse;
 import br.com.fiap.reciclamais.model.result.UsuarioLoginResult;
 import br.com.fiap.reciclamais.model.result.UsuarioResult;
@@ -68,6 +69,34 @@ public class TrocarPontoActivity extends AppCompatActivity {
     }
 
     public void trocarPontos(View view) {
+        String voucher = "10";
+        TrocaRequest trocaRequest = new TrocaRequest();
+        trocaRequest.setCpf(cpf);
+        trocaRequest.setVoucher(voucher);
+
+        Call<GenericResponse<String>> call = new RetrofitConfig().getPontuacaoService().trocar(trocaRequest);
+        call.enqueue(new Callback<GenericResponse<String>>() {
+            @Override
+            public void onResponse(Call<GenericResponse<String>> call, Response<GenericResponse<String>> response) {
+                if(response.isSuccessful()){
+                    String result = response.body().getResults();
+                    Toast.makeText(TrocarPontoActivity.this, result, Toast.LENGTH_SHORT).show();
+                    buscarUsuario();
+                } else {
+                    try {
+                        JSONObject jsonError = new JSONObject(response.errorBody().string());
+                        Toast.makeText(TrocarPontoActivity.this, jsonError.getString("descricao"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenericResponse<String>> call, Throwable t) {
+                Log.d("err", t.getMessage());
+            }
+        });
 
     }
 }

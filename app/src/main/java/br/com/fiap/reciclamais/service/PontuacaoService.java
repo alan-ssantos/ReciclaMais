@@ -22,7 +22,7 @@ public interface PontuacaoService {
     @POST("pontuacao/salvar")
     Call<GenericResponse<RegistroResult>> registrar(@Body List<Registro> request);
 
-    @POST("pontuacap/trocar")
+    @POST("pontuacao/trocar")
     Call<GenericResponse<String>> trocar(@Body TrocaRequest request);
 
 }
