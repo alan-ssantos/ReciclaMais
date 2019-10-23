@@ -47,32 +47,67 @@
             android:weightSum="2"
             android:orientation="horizontal">
 
-            <Button
+            <RelativeLayout
                 android:id="@+id/btnEscanear"
+                android:onClick="abrirScanner"
+                style="@style/ButtonStyle"
                 android:padding="20dp"
                 android:layout_width="0dp"
-                style="@style/ButtonStyle"
-                android:layout_marginRight="6dp"
-                android:layout_height="150dp"
-                android:drawableTop="@drawable/icone_camera"
                 android:layout_weight="1"
-                android:textColor="#ffffff"
-                android:textSize="16sp"
-                android:text="@string/escanear"
-                android:onClick="abrirScanner"/>
+                android:layout_height="150dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="center">
 
-            <Button
+                <ImageView
+                    android:id="@+id/iconCamera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="30dp"
+                    android:src="@drawable/icone_camera" />
+
+                <TextView
+                    android:id="@+id/txtBtnEscanear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iconCamera"
+                    android:layout_marginBottom="-30dp"
+                    android:text="@string/escanear"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="22sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/btnEnviar"
-                style="@style/ButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/icone_check"
                 android:onClick="abrirLista"
+                style="@style/ButtonStyle"
                 android:padding="20dp"
-                android:text="Enviar registros"
-                android:textColor="#ffffff"
-                android:textSize="16sp" />
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="150dp"
+                android:layout_marginStart="5dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/iconCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginBottom="30dp"
+                    android:src="@drawable/icone_check" />
+
+                <TextView
+                    android:id="@+id/txtBtnListar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iconCheck"
+                    android:layout_marginBottom="-30dp"
+                    android:text="@string/enviar_registros"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+            </RelativeLayout>
 
         </LinearLayout>
 

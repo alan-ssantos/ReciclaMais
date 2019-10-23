@@ -160,4 +160,5 @@ public class ScannerActivity extends AppCompatActivity {
     public void finalizar(View view) {
         finish();
     }
+
 }
