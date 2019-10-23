@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -34,10 +35,13 @@ public class CadastroActivity extends AppCompatActivity {
     EditText edtCep;
     EditText edtRua;
     EditText edtNumero;
+    EditText edtBairro;
     EditText edtEstado;
     EditText edtCidade;
 
     ViewFlipper viewFlipper;
+
+    RelativeLayout progressBar;
 
     GenericResponse<String> cadastroResponse;
     EnderecoResponse enderecoResponse;
@@ -65,9 +69,11 @@ public class CadastroActivity extends AppCompatActivity {
 
         edtRua = findViewById(R.id.edtRua);
         edtNumero = findViewById(R.id.edtNumero);
+        edtBairro = findViewById(R.id.edtBairro);
         edtEstado = findViewById(R.id.edtEstado);
         edtCidade = findViewById(R.id.edtCidade);
 
+        progressBar = findViewById(R.id.progressBar1);
         viewFlipper = findViewById(R.id.viewFlipper);
     }
 
@@ -75,6 +81,8 @@ public class CadastroActivity extends AppCompatActivity {
         Usuario request = setCadastroRequest();
 
         if (request == null) return;
+
+        progressBar.setVisibility(View.VISIBLE);
 
         Call<GenericResponse<String>> call = new RetrofitConfig().getUsuarioService().cadastrar(request);
         call.enqueue(new Callback<GenericResponse<String>>() {
@@ -92,6 +100,7 @@ public class CadastroActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -112,6 +121,7 @@ public class CadastroActivity extends AppCompatActivity {
             usuario.setCep(MaskEditUtil.unmask(edtCep.getText().toString().trim()));
             usuario.setRua(edtRua.getText().toString().trim());
             usuario.setNumero(Integer.parseInt(edtNumero.getText().toString().trim()));
+            usuario.setBairro(edtBairro.getText().toString().trim());
             usuario.setEstado(edtEstado.getText().toString().trim());
             usuario.setCidade(edtCidade.getText().toString().trim());
 
@@ -123,6 +133,10 @@ public class CadastroActivity extends AppCompatActivity {
 
     private void buscaEndereco() {
         String cep = MaskEditUtil.unmask(edtCep.getText().toString().trim());
+
+        if (cep.isEmpty()) return;
+
+        progressBar.setVisibility(View.VISIBLE);
 
         Call<EnderecoResponse> call = new ViaCep().getViaCepService().buscar(cep);
         call.enqueue(new Callback<EnderecoResponse>() {
@@ -141,10 +155,12 @@ public class CadastroActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<EnderecoResponse> call, Throwable t) {
+                exibeToast("Tente novamente");
                 Log.d("err", t.getMessage());
             }
         });
@@ -154,6 +170,7 @@ public class CadastroActivity extends AppCompatActivity {
         edtRua.setText(response.getLogradouro());
         edtEstado.setText(response.getUf());
         edtCidade.setText(response.getLocalidade());
+        edtBairro.setText(response.getBairro());
     }
 
     public void finalizar(View view) {
@@ -234,6 +251,13 @@ public class CadastroActivity extends AppCompatActivity {
         String rua = edtRua.getText().toString().trim();
         if (rua.isEmpty() || rua.length() < 4){
             exibeToast("Insira uma Rua válida");
+            return false;
+        }
+
+        //Validação de Bairro
+        String bairro = edtBairro.getText().toString().trim();
+        if (bairro.isEmpty() || bairro.length() < 2){
+            exibeToast("Insira um bairro válido");
             return false;
         }
 

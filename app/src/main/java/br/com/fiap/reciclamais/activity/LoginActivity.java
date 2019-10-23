@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtSenha;
     Button btnEntrar;
 
-    private RelativeLayout spinner;
+    RelativeLayout spinner;
 
     GenericResponse<LoginResult> loginResponse;
     Activity activity = LoginActivity.this;
@@ -72,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     loginResponse = response.body();
                     abrirPerfil(loginResponse.getResults().getPerfil());
-                    spinner.setVisibility(View.GONE);
                 } else {
                     try {
                         btnEntrar.setEnabled(true);
@@ -81,13 +80,14 @@ public class LoginActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    spinner.setVisibility(View.GONE);
                 }
+                spinner.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<GenericResponse<LoginResult>> call, Throwable t) {
                 Log.d("err", t.getMessage());
+                Toast.makeText(LoginActivity.this, "Tenta novamente mais tarde", Toast.LENGTH_SHORT).show();
                 btnEntrar.setEnabled(true);
                 spinner.setVisibility(View.GONE);
             }
@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
         switch (perfil){
             case CLIENTE: intent = new Intent(activity, UsuarioActivity.class); break;
             case FUNCIONARIO: intent =  new Intent(activity, FuncionarioActivity.class); break;
+            case ADMINISTRADOR: intent = new Intent(activity, AdminActivity.class); break;
             default: throw new IllegalStateException("Unexpected value: " + perfil);
         }
 

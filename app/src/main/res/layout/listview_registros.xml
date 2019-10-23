@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:paddingVertical="8dp"
-    android:background="@drawable/main_background_color"
+    android:background="#00000000"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView

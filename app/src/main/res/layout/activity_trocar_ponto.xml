@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/txtUsuarioNome"
-            android:text="@string/bem_vindo"
+            android:text=""
             style="@style/TitleStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -41,7 +41,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/pts"
+                android:text=""
                 android:textColor="#19b08f"
                 android:textSize="28sp"
                 android:textStyle="bold">

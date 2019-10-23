@@ -19,7 +19,7 @@
 
             <TextView
                 android:id="@+id/txtUsuarioNome"
-                android:text="@string/bem_vindo"
+                android:text=""
                 style="@style/TitleStyle"
                 android:textAlignment="center"
                 android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="70dp"
             android:layout_marginTop="5dp"
-            android:text="@string/pts"
+            android:text=""
             android:textColor="#19b08f"
             android:textSize="50sp"
             android:textStyle="bold">

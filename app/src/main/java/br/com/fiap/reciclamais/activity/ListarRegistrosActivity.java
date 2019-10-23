@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -30,6 +31,8 @@ public class ListarRegistrosActivity extends AppCompatActivity {
     ListView lstRegistros;
     GenericResponse<RegistroResult> registroResponse;
 
+    RelativeLayout spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,8 @@ public class ListarRegistrosActivity extends AppCompatActivity {
 
         lstRegistros = findViewById(R.id.lstRegistros);
         repository = new ScannerRepository(this);
+
+        spinner = findViewById(R.id.progressBar1);
 
         atualizaLista();
     }
@@ -47,6 +52,8 @@ public class ListarRegistrosActivity extends AppCompatActivity {
             exibeToast("Nenhuma registro a ser salvo");
             return;
         }
+
+        spinner.setVisibility(View.VISIBLE);
 
         Call<GenericResponse<RegistroResult>> call = new RetrofitConfig().getPontuacaoService().registrar(registros);
 
@@ -65,11 +72,14 @@ public class ListarRegistrosActivity extends AppCompatActivity {
                     }
                 }
                 limparListar();
+                spinner.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<GenericResponse<RegistroResult>> call, Throwable t) {
                 Log.d("err", t.getMessage());
+                exibeToast("Tente novamente");
+                spinner.setVisibility(View.GONE);
             }
         });
     }

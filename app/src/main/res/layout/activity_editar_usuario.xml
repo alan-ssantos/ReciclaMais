@@ -6,127 +6,168 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="@android:dimen/thumbnail_width"
-            android:layout_height="100dp"
-            android:src="@drawable/logo"
-            android:layout_gravity="center"
-            android:contentDescription="@string/logotipo_reciclamais" />
-
-        <!-- NOME -->
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/nome" />
+            android:layout_height="match_parent">
 
-        <EditText
-            style="@style/InputStyle"
-            android:singleLine="true"
-            android:lines="1"
-            android:id="@+id/edtNome"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <!-- EMAIL -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/email"/>
+                <ImageView
+                    android:layout_width="@android:dimen/thumbnail_width"
+                    android:layout_height="100dp"
+                    android:src="@drawable/logo"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/logotipo_reciclamais" />
 
-        <EditText
-            style="@style/InputStyle"
-            android:inputType="textEmailAddress"
-            android:id="@+id/edtEmail"/>
+                <!-- NOME -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nome" />
 
-        <!-- SENHA -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/senha" />
+                <EditText
+                    style="@style/InputStyle"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:id="@+id/edtNome"/>
 
-        <EditText
-            style="@style/InputStyle"
-            android:inputType="textPassword"
-            android:id="@+id/edtSenha"/>
+                <!-- EMAIL -->
+                <TextView
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email"/>
 
-        <!-- CEP -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cep"/>
+                <EditText
+                    style="@style/InputStyle"
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/edtEmail"/>
 
-        <EditText
-            style="@style/InputStyle"
-            android:inputType="numberDecimal"
-            android:id="@+id/edtCep"/>
+                <!-- SENHA -->
+                <TextView
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/senha" />
 
-        <!-- RUA -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/rua"/>
+                <EditText
+                    style="@style/InputStyle"
+                    android:inputType="textPassword"
+                    android:id="@+id/edtSenha"/>
 
-        <EditText
-            style="@style/InputStyle"
-            android:id="@+id/edtRua"/>
+                <!-- CEP -->
+                <TextView
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cep"/>
 
-        <!-- NUMERO -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/numero"/>
+                <EditText
+                    style="@style/InputStyle"
+                    android:inputType="numberDecimal"
+                    android:id="@+id/edtCep"/>
 
-        <EditText
-            style="@style/InputStyle"
-            android:inputType="number"
-            android:id="@+id/edtNumero"/>
+                <!-- RUA -->
+                <TextView
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rua"/>
 
-        <!-- ESTADO -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/estado"/>
+                <EditText
+                    style="@style/InputStyle"
+                    android:id="@+id/edtRua"/>
 
-        <EditText
-            style="@style/InputStyle"
-            android:id="@+id/edtEstado"/>
+                <!-- NUMERO -->
+                <TextView
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/numero"/>
 
-        <!-- CIDADE -->
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cidade"/>
+                <EditText
+                    style="@style/InputStyle"
+                    android:inputType="number"
+                    android:id="@+id/edtNumero"/>
 
-        <EditText
-            style="@style/InputStyle"
-            android:id="@+id/edtCidade"/>
+                <!-- BAIRRO -->
+                <TextView
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bairro"/>
 
-        <Button
-            style="@style/ButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textColor="#fff"
-            android:text="Salvar"
-            android:onClick="salvarAlteracoes"/>
+                <EditText
+                    style="@style/InputStyle"
+                    android:id="@+id/edtBairro"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginVertical="16dp"
-            android:textColor="#c00"
-            android:text="Excluir conta"
-            android:onClick="deletarConta"/>
+
+                <!-- ESTADO -->
+                <TextView
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estado"/>
+
+                <EditText
+                    style="@style/InputStyle"
+                    android:id="@+id/edtEstado"/>
+
+                <!-- CIDADE -->
+                <TextView
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cidade"/>
+
+                <EditText
+                    style="@style/InputStyle"
+                    android:id="@+id/edtCidade"/>
+
+                <Button
+                    style="@style/ButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#fff"
+                    android:text="Salvar"
+                    android:onClick="salvarAlteracoes"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginVertical="16dp"
+                    android:onClick="deletarConta"
+                    android:text="Excluir conta"
+                    android:textColor="#c00" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/progressBar1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#99000000"
+                android:visibility="gone"
+                android:clickable="false">
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:indeterminateTint="#fff"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,6 @@ import br.com.fiap.reciclamais.model.response.GenericResponse;
 import br.com.fiap.reciclamais.model.result.UsuarioResult;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
 import br.com.fiap.reciclamais.retrofit.ViaCep;
-import br.com.fiap.reciclamais.utils.enums.PerfilEnum;
 import br.com.fiap.reciclamais.utils.mask.MaskEditUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,8 +36,11 @@ public class EditarUsuarioActivity extends AppCompatActivity {
     EditText edtCep;
     EditText edtRua;
     EditText edtNumero;
+    EditText edtBairro;
     EditText edtEstado;
     EditText edtCidade;
+
+    RelativeLayout spinner;
 
     String cpf;
 
@@ -64,8 +67,11 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         });
         edtRua = findViewById(R.id.edtRua);
         edtNumero = findViewById(R.id.edtNumero);
+        edtBairro = findViewById(R.id.edtBairro);
         edtEstado = findViewById(R.id.edtEstado);
         edtCidade = findViewById(R.id.edtCidade);
+
+        spinner = findViewById(R.id.progressBar1);
 
         cpf = this.getIntent().getExtras().getString("cpf");
 
@@ -73,6 +79,8 @@ public class EditarUsuarioActivity extends AppCompatActivity {
     }
 
     private void buscaUsuario() {
+        spinner.setVisibility(View.VISIBLE);
+
         Call<GenericResponse<UsuarioResult>> call = new RetrofitConfig().getUsuarioService().buscarUsuario(cpf);
         call.enqueue(new Callback<GenericResponse<UsuarioResult>>() {
             @Override
@@ -88,10 +96,13 @@ public class EditarUsuarioActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+                spinner.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Call<GenericResponse<UsuarioResult>> call, Throwable t) {
                 Log.d("err", t.getMessage());
+                spinner.setVisibility(View.GONE);
+                exibeToast("Tente Novamente");
             }
         });
     }
@@ -104,13 +115,16 @@ public class EditarUsuarioActivity extends AppCompatActivity {
        edtCep.setText(usuario.getEndereco().getCep());
        edtRua.setText(usuario.getEndereco().getRua());
        edtNumero.setText(String.valueOf(usuario.getEndereco().getNumero()));
+       edtBairro.setText(usuario.getEndereco().getBairro());
        edtEstado.setText(usuario.getEndereco().getEstado());
        edtCidade.setText(usuario.getEndereco().getCidade());
     }
 
     public void salvarAlteracoes(View view) {
         Usuario request = setUsuarioRequest();
+
         if (request == null) return;
+        spinner.setVisibility(View.VISIBLE);
 
         Call<GenericResponse<String>> call = new RetrofitConfig().getUsuarioService().atualizar(request);
         call.enqueue(new Callback<GenericResponse<String>>() {
@@ -126,11 +140,14 @@ public class EditarUsuarioActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+                spinner.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<GenericResponse<String>> call, Throwable t) {
+                exibeToast("Tente Novamente");
                 Log.d("err", t.getMessage());
+                spinner.setVisibility(View.GONE);
             }
         });
     }
@@ -146,6 +163,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
             usuario.setCep(MaskEditUtil.unmask(edtCep.getText().toString().trim()));
             usuario.setRua(edtRua.getText().toString().trim());
             usuario.setNumero(Integer.parseInt(edtNumero.getText().toString().trim()));
+            usuario.setBairro(edtBairro.getText().toString().trim());
             usuario.setEstado(edtEstado.getText().toString().trim());
             usuario.setCidade(edtCidade.getText().toString().trim());
 
@@ -203,6 +221,13 @@ public class EditarUsuarioActivity extends AppCompatActivity {
             return false;
         }
 
+        //Validação de Bairro
+        String bairro = edtBairro.getText().toString().trim();
+        if (bairro.isEmpty() || bairro.length() < 2){
+            exibeToast("Insira um bairro válido");
+            return false;
+        }
+
         //Validação de Estado
         String estado = edtEstado.getText().toString().trim();
         if (estado.isEmpty() || estado.length() < 2){
@@ -223,6 +248,10 @@ public class EditarUsuarioActivity extends AppCompatActivity {
     private void buscaEndereco() {
         String cep = MaskEditUtil.unmask(edtCep.getText().toString().trim());
 
+        if (cep.isEmpty()) return;;
+
+        spinner.setVisibility(View.VISIBLE);
+
         Call<EnderecoResponse> call = new ViaCep().getViaCepService().buscar(cep);
         call.enqueue(new Callback<EnderecoResponse>() {
             @Override
@@ -240,17 +269,21 @@ public class EditarUsuarioActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+                spinner.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<EnderecoResponse> call, Throwable t) {
+                exibeToast("Tente Novamente");
                 Log.d("err", t.getMessage());
+                spinner.setVisibility(View.GONE);
             }
         });
     }
 
     private void preencheEndereco(EnderecoResponse response) {
         edtRua.setText(response.getLogradouro());
+        edtBairro.setText(response.getBairro());
         edtEstado.setText(response.getUf());
         edtCidade.setText(response.getLocalidade());
     }

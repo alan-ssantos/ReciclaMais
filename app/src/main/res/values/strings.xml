@@ -15,8 +15,6 @@
     <string name="email">E-mail</string>
     <string name="nome">Nome</string>
     <string name="coleta_do_dia">Você participou de 0 coletas</string>
-    <string name="bem_vindo">Bem vindo, Alan</string>
-    <string name="pts">120 pts</string>
     <string name="hist_rico_recente">Histórico recente</string>
     <string name="trocar_pontos">Trocar pontos</string>
     <string name="title_activity_teste_navigation">TesteNavigationActivity</string>
@@ -26,4 +24,11 @@
     <string name="logotipo_reciclamais">Logotipo ReciclaMais</string>
     <string name="field_required">Este campo é obrigatório</string>
     <string name="editar"><u>Editar usuário</u></string>
+    <string name="nao_possui_conta_cadastre_aqui">Não possui uma conta? <b>Cadastre-se aqui.</b></string>
+    <string name="entrar">Entrar</string>
+    <string name="hint_cpf">123.456.789-10</string>
+    <string name="hint_senha">•••••</string>
+    <string name="bairro">Bairro</string>
+    <string name="buscar">Buscar</string>
+    <string name="alterar_para_funcionario">Alterar para funcionario</string>
 </resources>

@@ -9,10 +9,11 @@ public class Usuario {
     private String cep;
     private String rua;
     private Integer numero;
+    private String bairro;
     private String estado;
     private String cidade;
 
-    public Usuario(String nome, String email, String senha, String cpf, String cep, String rua, Integer numero, String estado, String cidade) {
+    public Usuario(String nome, String email, String senha, String cpf, String cep, String rua, Integer numero, String bairro, String estado, String cidade) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -20,22 +21,20 @@ public class Usuario {
         this.cep = cep;
         this.rua = rua;
         this.numero = numero;
-        this.estado = estado;
-        this.cidade = cidade;
-    }
-
-    public Usuario(String nome, String email, String senha, String cep, String rua, Integer numero, String estado, String cidade) {
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.cep = cep;
-        this.rua = rua;
-        this.numero = numero;
+        this.bairro = bairro;
         this.estado = estado;
         this.cidade = cidade;
     }
 
     public Usuario() {
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public String getNome() {

@@ -38,7 +38,6 @@ public class UsuarioActivity extends AppCompatActivity {
     GenericResponse<UsuarioLoginResult> usuarioResponse;
     GenericResponse<List<HistoricoResult>> historicoResponse;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +53,11 @@ public class UsuarioActivity extends AppCompatActivity {
 
         cpf = this.getIntent().getExtras().getString("cpf");
 
-        buscarUsuario();
+        carregarDados();
         buscaHistorico();
     }
 
-    public void buscarUsuario() {
+    public void carregarDados() {
         Call<GenericResponse<UsuarioLoginResult>> call = new RetrofitConfig().getUsuarioService().buscarPontuacao(cpf);
         call.enqueue(new Callback<GenericResponse<UsuarioLoginResult>>() {
 
@@ -67,7 +66,7 @@ public class UsuarioActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     usuarioResponse = response.body();
                     txtNome.setText(usuarioResponse.getResults().getNome());
-                    txtPontuacao.setText(usuarioResponse.getResults().getPontuacaoTotal().toString());
+                    txtPontuacao.setText(String.valueOf(usuarioResponse.getResults().getPontuacaoTotal()));
                     txtDescricao.setText("Você participou de " + String.valueOf(usuarioResponse.getResults().getReciclagemTotal()) + " coletas");
 
                 } else {
@@ -163,7 +162,7 @@ public class UsuarioActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        buscarUsuario();
+        carregarDados();
     }
 
     public void abrirEditarUsuario(View view) {
@@ -171,7 +170,6 @@ public class UsuarioActivity extends AppCompatActivity {
         intent.putExtra("cpf", cpf);
         startActivity(intent);
     }
-
 
     public void abrirTrocarPontos(View view) {
         Intent intent = new Intent(UsuarioActivity.this, TrocarPontoActivity.class);
