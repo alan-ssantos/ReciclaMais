@@ -31,6 +31,9 @@ public interface UsuarioService {
     @PATCH("usuario/atualizar")
     Call<GenericResponse<String>> atualizar(@Body Usuario usuario);
 
+    @PATCH("usuario/{cpf}/alterar-perfil")
+    Call<GenericResponse<String>> alterarPerfil(@Path("cpf") String cpf);
+
     @DELETE("usuario/{cpf}")
     Call<GenericResponse<String>> deletar(@Path("cpf") String request);
 

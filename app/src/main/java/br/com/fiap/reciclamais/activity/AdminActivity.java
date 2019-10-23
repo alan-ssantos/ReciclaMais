@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import org.json.JSONObject;
 import br.com.fiap.reciclamais.R;
 import br.com.fiap.reciclamais.model.response.GenericResponse;
 import br.com.fiap.reciclamais.model.result.UsuarioLoginResult;
+import br.com.fiap.reciclamais.model.result.UsuarioResult;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,8 +33,11 @@ public class AdminActivity extends AppCompatActivity {
     String usuarioCpf;
 
     RelativeLayout spinner;
+    LinearLayout linearResp;
 
     GenericResponse<UsuarioLoginResult> adminResponse;
+    GenericResponse<UsuarioResult> usuarioResponse;
+    GenericResponse<String> alterarResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,9 @@ public class AdminActivity extends AppCompatActivity {
         edtBuscarUsuario = findViewById(R.id.edtBuscarUsuario);
         txtUsuarioNome = findViewById(R.id.txtUsuarioNome);
         txtUsuarioEmail = findViewById(R.id.txtUsuarioEmail);
+
         spinner = findViewById(R.id.progressBar1);
+        linearResp = findViewById(R.id.linearResp);
 
         carregarDados();
     }
@@ -80,11 +87,66 @@ public class AdminActivity extends AppCompatActivity {
         });
     }
 
-    public void buscarFuncionario(View view) {
+    public void buscarUsuario(View view) {
+        spinner.setVisibility(View.VISIBLE);
 
+        final String uCpf = edtBuscarUsuario.getText().toString().trim();
+
+        Call<GenericResponse<UsuarioResult>> call = new RetrofitConfig().getUsuarioService().buscarUsuario(uCpf);
+        call.enqueue(new Callback<GenericResponse<UsuarioResult>>() {
+            @Override
+            public void onResponse(Call<GenericResponse<UsuarioResult>> call, Response<GenericResponse<UsuarioResult>> response) {
+                if (response.isSuccessful()){
+                    usuarioResponse = response.body();
+                    linearResp.setVisibility(View.VISIBLE);
+                    txtUsuarioNome.setText(usuarioResponse.getResults().getNome());
+                    txtUsuarioEmail.setText(usuarioResponse.getResults().getEmail());
+
+                    usuarioCpf = uCpf;
+                } else {
+                    try {
+                        JSONObject jsonError = new JSONObject(response.errorBody().string());
+                        exibeToast(jsonError.getString("descricao"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                spinner.setVisibility(View.GONE);
+            }
+            @Override
+            public void onFailure(Call<GenericResponse<UsuarioResult>> call, Throwable t) {
+                Log.d("err", t.getMessage());
+                spinner.setVisibility(View.GONE);
+                exibeToast("Tente Novamente");
+            }
+        });
     }
 
     public void alterarFuncionario(View view) {
+        Call<GenericResponse<String>> call = new RetrofitConfig().getUsuarioService().alterarPerfil(usuarioCpf);
+        call.enqueue(new Callback<GenericResponse<String>>() {
+            @Override
+            public void onResponse(Call<GenericResponse<String>> call, Response<GenericResponse<String>> response) {
+                if (response.isSuccessful()){
+                    alterarResponse = response.body();
+
+                    exibeToast(alterarResponse.getResults());
+                } else {
+                    try {
+                        JSONObject jsonError = new JSONObject(response.errorBody().string());
+                        exibeToast(jsonError.getString("descricao"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenericResponse<String>> call, Throwable t) {
+                exibeToast("Tente novamente");
+                Log.d("failure", t.getMessage());
+            }
+        });
     }
 
     private void exibeToast(String texto){

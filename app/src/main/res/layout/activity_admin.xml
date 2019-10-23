@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/buscar"
-            android:onClick="buscarFuncionario"/>
+            android:onClick="buscarUsuario"/>
 
     </LinearLayout>
 
@@ -44,7 +44,8 @@
         android:orientation="vertical"
         android:layout_marginTop="16dp"
         android:layout_below="@id/linearBusca"
-        android:visibility="gone">
+        android:visibility="invisible"
+        android:id="@+id/linearResp">
 
         <TextView
             android:layout_width="match_parent"
