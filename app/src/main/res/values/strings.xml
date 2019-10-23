@@ -31,4 +31,6 @@
     <string name="bairro">Bairro</string>
     <string name="buscar">Buscar</string>
     <string name="alterar_para_funcionario">Alterar para funcionario</string>
+    <string name="escanear">Escanear</string>
+    <string name="enviar_registros">Enviar registros</string>
 </resources>
