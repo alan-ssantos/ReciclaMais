@@ -11,13 +11,32 @@
         android:padding="16dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtUsuarioNome"
-            android:text=""
-            style="@style/TitleStyle"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </TextView>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" >
+
+            <ImageView
+                android:id="@+id/btnVoltar"
+                android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+                android:onClick="abrirHome"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/txtUsuarioNome"
+                android:text=""
+                style="@style/TitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+        </RelativeLayout>
+
+
 
         <RelativeLayout
             android:paddingVertical="8dp"

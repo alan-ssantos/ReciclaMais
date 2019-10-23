@@ -8,6 +8,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -158,5 +159,9 @@ public class ScannerActivity extends AppCompatActivity {
 
     public void finalizar(View view) {
         finish();
+    }
+
+    public void abrirLista(View view) {
+        startActivity(new Intent(ScannerActivity.this, FuncionarioActivity.class));
     }
 }
