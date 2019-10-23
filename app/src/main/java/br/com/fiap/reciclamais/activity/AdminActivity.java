@@ -18,6 +18,7 @@ import br.com.fiap.reciclamais.model.response.GenericResponse;
 import br.com.fiap.reciclamais.model.result.UsuarioLoginResult;
 import br.com.fiap.reciclamais.model.result.UsuarioResult;
 import br.com.fiap.reciclamais.retrofit.RetrofitConfig;
+import br.com.fiap.reciclamais.utils.mask.MaskEditUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,6 +49,8 @@ public class AdminActivity extends AppCompatActivity {
 
         txtNome = findViewById(R.id.txtNome);
         edtBuscarUsuario = findViewById(R.id.edtBuscarUsuario);
+        edtBuscarUsuario.addTextChangedListener(MaskEditUtil.mask(edtBuscarUsuario, MaskEditUtil.FORMAT_CPF));
+
         txtUsuarioNome = findViewById(R.id.txtUsuarioNome);
         txtUsuarioEmail = findViewById(R.id.txtUsuarioEmail);
 

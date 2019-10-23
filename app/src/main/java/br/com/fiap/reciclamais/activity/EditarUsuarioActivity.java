@@ -1,12 +1,15 @@
 package br.com.fiap.reciclamais.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -91,7 +94,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
                 } else {
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
-                        exibeToast(jsonError.getString("descricao"));
+                        exibirToast(jsonError.getString("descricao"));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -102,7 +105,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
             public void onFailure(Call<GenericResponse<UsuarioResult>> call, Throwable t) {
                 Log.d("err", t.getMessage());
                 spinner.setVisibility(View.GONE);
-                exibeToast("Tente Novamente");
+                exibirToast("Tente Novamente");
             }
         });
     }
@@ -135,7 +138,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
                 } else{
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
-                        exibeToast(jsonError.getString("descricao"));
+                        exibirToast(jsonError.getString("descricao"));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -145,7 +148,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GenericResponse<String>> call, Throwable t) {
-                exibeToast("Tente Novamente");
+                exibirToast("Tente Novamente");
                 Log.d("err", t.getMessage());
                 spinner.setVisibility(View.GONE);
             }
@@ -177,7 +180,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         //Validação do nome
         String nome = edtNome.getText().toString().trim();
         if (nome.isEmpty() || nome.length() <= 1){
-            exibeToast("Insira um nome válido");
+            exibirToast("Insira um nome válido");
             return false;
         }
 
@@ -188,18 +191,18 @@ public class EditarUsuarioActivity extends AppCompatActivity {
             Pattern pattern = Pattern.compile(expressao, Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(email);
             if (!matcher.matches()) {
-                exibeToast("Insira um e-mail válido");
+                exibirToast("Insira um e-mail válido");
                 return false;
             }
         } else {
-            exibeToast("Insira um e-mail válido");
+            exibirToast("Insira um e-mail válido");
             return false;
         }
 
         //Validação de Senha
         String senha = edtSenha.getText().toString();
         if (senha.isEmpty()){
-            exibeToast("Insira uma senha");
+            exibirToast("Insira uma senha");
             return false;
         }
 
@@ -210,35 +213,35 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         //Validação de CEP
         String cep = edtCep.getText().toString().trim();
         if (cep.isEmpty() || cep.length() < 9){
-            exibeToast("Insira um CEP válido");
+            exibirToast("Insira um CEP válido");
             return false;
         }
 
         //Validação de Rua
         String rua = edtRua.getText().toString().trim();
         if (rua.isEmpty() || rua.length() < 4){
-            exibeToast("Insira uma Rua válida");
+            exibirToast("Insira uma Rua válida");
             return false;
         }
 
         //Validação de Bairro
         String bairro = edtBairro.getText().toString().trim();
         if (bairro.isEmpty() || bairro.length() < 2){
-            exibeToast("Insira um bairro válido");
+            exibirToast("Insira um bairro válido");
             return false;
         }
 
         //Validação de Estado
         String estado = edtEstado.getText().toString().trim();
         if (estado.isEmpty() || estado.length() < 2){
-            exibeToast("Insira um Estado válido");
+            exibirToast("Insira um Estado válido");
             return false;
         }
 
         //Validação de Cidade
         String cidade = edtCidade.getText().toString().trim();
         if (cidade.isEmpty() || cidade.length() < 4){
-            exibeToast("Insira uma Cidade válida");
+            exibirToast("Insira uma Cidade válida");
             return false;
         }
 
@@ -264,7 +267,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
                 } else {
                     try {
                         JSONObject jsonError = new JSONObject(response.errorBody().string());
-                        exibeToast(jsonError.getString("descricao"));
+                        exibirToast(jsonError.getString("descricao"));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -274,7 +277,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<EnderecoResponse> call, Throwable t) {
-                exibeToast("Tente Novamente");
+                exibirToast("Tente Novamente");
                 Log.d("err", t.getMessage());
                 spinner.setVisibility(View.GONE);
             }
@@ -288,13 +291,13 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         edtCidade.setText(response.getLocalidade());
     }
 
-    public void deletarConta(View view){
+    public void deletarConta(){
         Call<GenericResponse<String>> call = new RetrofitConfig().getUsuarioService().deletar(cpf);
         call.enqueue(new Callback<GenericResponse<String>>() {
             @Override
             public void onResponse(Call<GenericResponse<String>> call, Response<GenericResponse<String>> response) {
                 String result = response.body().getResults();
-                exibeToast(result);
+                exibirToast(result);
                 finalizar();
             }
 
@@ -305,6 +308,23 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         });
     }
 
+    public void mostrarAlerta(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Quer mesmo deletar sua conta?")
+                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        deletarConta();
+                    }
+                })
+                .setNegativeButton("NÂO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        return;
+                    }
+                });
+        builder.create();
+        builder.show();
+    }
+
     private void finalizar(){
         Intent intent = new Intent(EditarUsuarioActivity.this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -312,7 +332,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void exibeToast(String texto){
+    private void exibirToast(String texto){
         Toast.makeText(this, texto, Toast.LENGTH_SHORT).show();
     }
 

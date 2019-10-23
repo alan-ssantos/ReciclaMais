@@ -105,7 +105,8 @@ public class ScannerActivity extends AppCompatActivity {
 
     public void mostraAlerta(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Precisamos usa a camera").setPositiveButton("Permitir", new DialogInterface.OnClickListener() {
+        builder.setMessage("Precisamos usa a camera")
+        .setPositiveButton("Permitir", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 solicitaPermissao();
             }
